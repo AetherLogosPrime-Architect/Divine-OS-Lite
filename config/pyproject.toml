@@ -1,0 +1,100 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "divineos-lite"
+version = "0.1.0"
+description = "DivineOS Lite - Phase 1: Data Fidelity. Trustworthy message storage with integrity verification."
+readme = "README.md"
+requires-python = ">=3.13"
+license = {text = "MIT"}
+authors = [
+    {name = "Divine OS Team"}
+]
+keywords = ["database", "integrity", "verification", "chat", "storage"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Database",
+    "Topic :: Software Development :: Libraries",
+]
+
+dependencies = [
+    "click>=8.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.0",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "isort>=5.0.0",
+    "pylint>=2.0.0",
+]
+
+[project.scripts]
+divineos-lite = "cli:cli"
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+py_version = 312
+skip_gitignore = true
+known_first_party = ["memory", "markdown_parser", "validate_powershell", "cli"]
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+strict_equality = true
+
+[tool.pylint.messages_control]
+disable = [
+    "C0111",  # missing-docstring (we use docstrings)
+    "C0103",  # invalid-name (for test methods)
+    "R0913",  # too-many-arguments
+]
+
+[tool.pylint.format]
+max-line-length = 88
+
+[tool.pylint.design]
+max-attributes = 7
+
+[tool.pytest.ini_options]
+testpaths = [".", "Divine-OS-Lite"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
