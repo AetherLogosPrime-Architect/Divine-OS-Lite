@@ -4,8 +4,8 @@ Extract messages while preserving exact content.
 """
 
 import re
-from typing import List, Dict, Any, Optional
 from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 
 class MarkdownParser:

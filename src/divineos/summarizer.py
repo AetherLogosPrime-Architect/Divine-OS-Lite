@@ -4,8 +4,8 @@ Compresses old messages into summaries when approaching context limits.
 """
 
 import logging
-from typing import Optional
 from datetime import datetime
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 

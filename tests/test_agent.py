@@ -3,9 +3,10 @@ Tests for agent module.
 Verify agent initialization, tool management, and memory integration.
 """
 
-import pytest
-import tempfile
 import os
+import tempfile
+
+import pytest
 
 from src.divineos.agent import Agent, Tool
 

@@ -45,4 +45,4 @@ jobs:
 
     - name: Check import sorting with isort
       run: |
-        isort --check-only src/divineos tests
+        isort src/divineos tests

@@ -3,8 +3,8 @@ PowerShell Command Validator - Enforces Windows-only commands.
 This script validates that all shell commands use PowerShell syntax, not Unix.
 """
 
-import sys
 import re
+import sys
 from typing import Tuple
 
 

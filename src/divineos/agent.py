@@ -4,8 +4,8 @@ Manages conversation loop: think → act → observe.
 """
 
 import logging
-from typing import Optional, Any, Callable
 from dataclasses import dataclass
+from typing import Any, Callable, Optional
 
 from src.divineos.memory_orchestrator import MemoryOrchestrator
 

@@ -3,10 +3,12 @@ DivineOS Lite CLI - Phase 1: Data Fidelity
 Commands: init, ingest, verify, export, diff
 """
 
-import click
 import sys
-from src.divineos.memory import Memory
+
+import click
+
 from src.divineos.markdown_parser import MarkdownParser
+from src.divineos.memory import Memory
 
 
 @click.group()

@@ -4,6 +4,7 @@ Verify message summarization and compression.
 """
 
 import pytest
+
 from src.divineos.summarizer import Summarizer
 
 

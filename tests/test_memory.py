@@ -3,12 +3,13 @@ Tests for Phase 1: Data Fidelity
 Verify integrity checks and round-trip accuracy.
 """
 
-import pytest
-import tempfile
 import os
+import tempfile
 
-from src.divineos.memory import Memory
+import pytest
+
 from src.divineos.markdown_parser import MarkdownParser
+from src.divineos.memory import Memory
 
 
 class TestMemoryIntegrity:

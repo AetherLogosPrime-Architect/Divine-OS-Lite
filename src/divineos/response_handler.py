@@ -3,10 +3,10 @@ Response handler - parse LLM responses and extract tool calls.
 Handles response parsing, tool call extraction, and result formatting.
 """
 
-import re
 import logging
-from typing import Any
+import re
 from dataclasses import dataclass
+from typing import Any
 
 logger = logging.getLogger(__name__)
 

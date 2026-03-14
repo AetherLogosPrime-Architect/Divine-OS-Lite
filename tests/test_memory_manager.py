@@ -3,10 +3,11 @@ Tests for memory manager module.
 Verify memory management with context awareness.
 """
 
-import pytest
-import tempfile
-import os
 import json
+import os
+import tempfile
+
+import pytest
 
 from src.divineos.memory_manager import MemoryManager
 

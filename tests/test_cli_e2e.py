@@ -8,9 +8,9 @@ import sqlite3
 from pathlib import Path
 
 import pytest
+from click.testing import CliRunner
 
 from src.divineos.cli import cli
-from click.testing import CliRunner
 
 
 class TestCLIInit:

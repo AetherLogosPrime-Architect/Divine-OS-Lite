@@ -4,6 +4,7 @@ Ensures the validator correctly identifies valid and invalid commands.
 """
 
 import pytest
+
 from src.divineos.validate_powershell import PowerShellValidator
 
 

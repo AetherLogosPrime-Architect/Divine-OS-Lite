@@ -3,9 +3,10 @@ Tests for memory orchestrator module.
 Verify end-to-end memory lifecycle management.
 """
 
-import pytest
-import tempfile
 import os
+import tempfile
+
+import pytest
 
 from src.divineos.memory_orchestrator import MemoryOrchestrator
 

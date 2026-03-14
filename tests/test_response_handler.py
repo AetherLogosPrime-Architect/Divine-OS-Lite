@@ -4,6 +4,7 @@ Verify LLM response parsing and tool call extraction.
 """
 
 import pytest
+
 from src.divineos.response_handler import ResponseHandler, ToolCall
 
 

@@ -4,8 +4,8 @@ Manages the full lifecycle: load → track → compress → save.
 """
 
 import logging
-from typing import Optional, Any
 from pathlib import Path
+from typing import Any, Optional
 
 from src.divineos.memory_manager import MemoryManager
 from src.divineos.summarizer import Summarizer
