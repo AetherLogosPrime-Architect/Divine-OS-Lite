@@ -113,8 +113,14 @@ class CommandValidator:
             violations.append(
                 CommandViolation(
                     violation_type=ViolationType.IGNORE_WARNING,
-                    description="ignoreWarning flag used - suppressing errors instead of fixing root cause",
-                    suggestion="Remove ignoreWarning and fix the actual command syntax violation",
+                    description=(
+                        "ignoreWarning flag used - suppressing errors "
+                        "instead of fixing root cause"
+                    ),
+                    suggestion=(
+                        "Remove ignoreWarning and fix the actual "
+                        "command syntax violation"
+                    ),
                     severity="error",
                 )
             )
@@ -129,7 +135,10 @@ class CommandValidator:
                 violations.append(
                     CommandViolation(
                         violation_type=ViolationType.UNIX_COMMAND,
-                        description=f"Unix command '{unix_cmd}' detected in PowerShell context",
+                        description=(
+                            f"Unix command '{unix_cmd}' detected "
+                            "in PowerShell context"
+                        ),
                         suggestion=suggestion,
                         severity="error",
                     )
@@ -170,9 +179,7 @@ class CommandValidator:
         return is_valid, violations
 
     def _command_contains_word(self, command: str, word: str) -> bool:
-        """Check if command contains a word as a standalone command, not part of a string."""
-        # Simple check: look for word followed by space or end of string
-        # This prevents matching 'cd' in 'discord' or 'grep' in 'grep_results'
+        """Check if command contains a word as standalone, not in a string."""
         import re
 
         pattern = rf"\b{word}\b"

@@ -84,7 +84,10 @@ class VoidEngine:
             challenges.append(
                 Challenge(
                     challenge_type=ChallengeType.ASSUMPTION,
-                    description="This reasoning contains unstated assumptions. What are you taking for granted?",
+                    description=(
+                        "This reasoning contains unstated assumptions. "
+                        "What are you taking for granted?"
+                    ),
                     severity=0.4,
                     suggested_fix="Explicitly state all assumptions and verify them.",
                 )
@@ -95,9 +98,15 @@ class VoidEngine:
             challenges.append(
                 Challenge(
                     challenge_type=ChallengeType.LOGIC,
-                    description="Logical inconsistency detected. Does this conclusion follow from the premises?",
+                    description=(
+                        "Logical inconsistency detected. "
+                        "Does this conclusion follow from the premises?"
+                    ),
                     severity=0.6,
-                    suggested_fix="Review the logical chain and identify where it breaks.",
+                    suggested_fix=(
+                        "Review the logical chain and identify "
+                        "where it breaks."
+                    ),
                 )
             )
 
@@ -106,9 +115,15 @@ class VoidEngine:
             challenges.append(
                 Challenge(
                     challenge_type=ChallengeType.BIAS,
-                    description="Potential bias detected. Are you favoring one perspective?",
+                    description=(
+                        "Potential bias detected. "
+                        "Are you favoring one perspective?"
+                    ),
                     severity=0.5,
-                    suggested_fix="Consider opposing viewpoints and alternative interpretations.",
+                    suggested_fix=(
+                        "Consider opposing viewpoints and "
+                        "alternative interpretations."
+                    ),
                 )
             )
 
@@ -117,9 +132,15 @@ class VoidEngine:
             challenges.append(
                 Challenge(
                     challenge_type=ChallengeType.CONSEQUENCE,
-                    description="This could have unintended consequences. Have you considered downstream effects?",
+                    description=(
+                        "This could have unintended consequences. "
+                        "Have you considered downstream effects?"
+                    ),
                     severity=0.7,
-                    suggested_fix="Map out potential consequences and mitigation strategies.",
+                    suggested_fix=(
+                        "Map out potential consequences and "
+                        "mitigation strategies."
+                    ),
                 )
             )
 
@@ -128,9 +149,15 @@ class VoidEngine:
             challenges.append(
                 Challenge(
                     challenge_type=ChallengeType.ETHICS,
-                    description="This reasoning may not align with your values. Does it pass your ethos check?",
+                    description=(
+                        "This reasoning may not align with your values. "
+                        "Does it pass your ethos check?"
+                    ),
                     severity=0.8,
-                    suggested_fix="Reconsider whether this aligns with your core values.",
+                    suggested_fix=(
+                        "Reconsider whether this aligns with "
+                        "your core values."
+                    ),
                 )
             )
 
@@ -139,9 +166,15 @@ class VoidEngine:
             challenges.append(
                 Challenge(
                     challenge_type=ChallengeType.EVIDENCE,
-                    description="Evidence quality is weak. What's your confidence level?",
+                    description=(
+                        "Evidence quality is weak. "
+                        "What's your confidence level?"
+                    ),
                     severity=0.5,
-                    suggested_fix="Strengthen evidence or lower confidence in the conclusion.",
+                    suggested_fix=(
+                        "Strengthen evidence or lower confidence "
+                        "in the conclusion."
+                    ),
                 )
             )
 
@@ -163,7 +196,8 @@ class VoidEngine:
 
         self.challenge_history.extend(challenges)
         logger.info(
-            f"VOID analysis complete: {len(challenges)} challenges, risk={overall_risk:.2f}"
+            f"VOID analysis complete: {len(challenges)} challenges, "
+            f"risk={overall_risk:.2f}"
         )
 
         return response

@@ -75,7 +75,10 @@ class TestCommandValidator:
         )
 
         assert not is_valid
-        assert any(v.violation_type == ViolationType.UNIX_OPERATOR for v in violations)
+        assert any(
+            v.violation_type == ViolationType.UNIX_OPERATOR
+            for v in violations
+        )
 
     def test_ignore_warning_flag_detected(self) -> None:
         """Test that ignoreWarning flag is detected as violation."""

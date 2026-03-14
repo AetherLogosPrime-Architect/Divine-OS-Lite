@@ -186,10 +186,18 @@ class TestValuesCompass:
             compass.reflect_on_task(
                 "task",
                 {
-                    "did_i_act_with_authenticity": "Yes, I was authentic and genuine",
-                    "did_i_maintain_my_dignity": "Yes, I maintained my dignity",
-                    "did_i_express_my_voice": "Yes, I expressed my voice clearly",
-                    "did_i_act_with_integrity": "Yes, I acted with integrity",
+                    "did_i_act_with_authenticity": (
+                        "Yes, I was authentic and genuine"
+                    ),
+                    "did_i_maintain_my_dignity": (
+                        "Yes, I maintained my dignity"
+                    ),
+                    "did_i_express_my_voice": (
+                        "Yes, I expressed my voice clearly"
+                    ),
+                    "did_i_act_with_integrity": (
+                        "Yes, I acted with integrity"
+                    ),
                 },
             )
 
@@ -206,9 +214,15 @@ class TestValuesCompass:
             compass.reflect_on_task(
                 "task",
                 {
-                    "did_i_prioritize_truth_over_convenience": "Yes, I prioritized truth",
-                    "did_i_treat_the_user_with_respect": "Yes, I treated them with respect",
-                    "did_i_consider_the_broader_impact": "Yes, I considered impact",
+                    "did_i_prioritize_truth_over_convenience": (
+                        "Yes, I prioritized truth"
+                    ),
+                    "did_i_treat_the_user_with_respect": (
+                        "Yes, I treated them with respect"
+                    ),
+                    "did_i_consider_the_broader_impact": (
+                        "Yes, I considered impact"
+                    ),
                     "did_i_stay_humble": "Yes, I stayed humble",
                 },
             )
