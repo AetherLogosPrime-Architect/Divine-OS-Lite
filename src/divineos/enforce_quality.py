@@ -18,6 +18,32 @@ class QualityEnforcer:
         self.repo_root = repo_root or Path.cwd()
         self.errors: List[str] = []
 
+    def check_black(self, files: List[str]) -> bool:
+        """Check if files are formatted with Black."""
+        if not files:
+            return True
+
+        print("🔎 Running black (format check)...")
+        result = subprocess.run(
+            ["python", "-m", "black", "--check", "--line-length", "88"] + files,
+            capture_output=True,
+            text=True,
+        )
+
+        if result.returncode != 0:
+            print("⚠️  Black formatting issues found. Auto-formatting...")
+            # Auto-format the files
+            subprocess.run(
+                ["python", "-m", "black", "--line-length", "88"] + files,
+                capture_output=True,
+                text=True,
+            )
+            print("✅ Files auto-formatted with Black")
+            return True
+
+        print("✅ Black formatting check passed")
+        return True
+
     def check_flake8(self, files: List[str]) -> bool:
         """Run flake8 on files."""
         if not files:
@@ -119,7 +145,8 @@ class QualityEnforcer:
 
         print(f"📝 Checking files: {', '.join(staged_files)}\n")
 
-        # Run checks
+        # Run checks - Black first to auto-format
+        black_ok = self.check_black(staged_files)
         flake8_ok = self.check_flake8(staged_files)
         mypy_ok = self.check_mypy(staged_files)
 
@@ -128,7 +155,7 @@ class QualityEnforcer:
 
         print()
 
-        if not (flake8_ok and mypy_ok and pytest_ok):
+        if not (black_ok and flake8_ok and mypy_ok and pytest_ok):
             print("❌ COMMIT BLOCKED: Fix errors before committing")
             return False
 
