@@ -7,8 +7,8 @@ import pytest
 import tempfile
 import os
 from pathlib import Path
-from memory import Memory
-from markdown_parser import MarkdownParser
+from src.divineos.memory import Memory
+from src.divineos.markdown_parser import MarkdownParser
 
 
 class TestMemoryIntegrity:

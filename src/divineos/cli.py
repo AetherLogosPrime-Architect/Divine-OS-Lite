@@ -5,8 +5,8 @@ Commands: init, ingest, verify, export, diff
 
 import click
 import sys
-from memory import Memory
-from markdown_parser import MarkdownParser
+from src.divineos.memory import Memory
+from src.divineos.markdown_parser import MarkdownParser
 
 
 @click.group()

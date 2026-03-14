@@ -1,3 +1,6 @@
+# This file is a wrapper that imports from config/pyproject.toml
+# See config/pyproject.toml for the actual configuration
+
 [build-system]
 requires = ["setuptools>=65.0", "wheel"]
 build-backend = "setuptools.build_meta"
@@ -39,7 +42,7 @@ dev = [
 ]
 
 [project.scripts]
-divineos-lite = "cli:cli"
+divineos-lite = "src.divineos.cli:cli"
 
 [tool.black]
 line-length = 88
@@ -47,7 +50,6 @@ target-version = ["py312"]
 include = '\.pyi?$'
 extend-exclude = '''
 /(
-  # directories
   \.eggs
   | \.git
   | \.hg
@@ -64,7 +66,7 @@ profile = "black"
 line_length = 88
 py_version = 312
 skip_gitignore = true
-known_first_party = ["memory", "markdown_parser", "validate_powershell", "cli"]
+known_first_party = ["src.divineos"]
 
 [tool.mypy]
 python_version = "3.13"
@@ -81,9 +83,9 @@ strict_equality = true
 
 [tool.pylint.messages_control]
 disable = [
-    "C0111",  # missing-docstring (we use docstrings)
-    "C0103",  # invalid-name (for test methods)
-    "R0913",  # too-many-arguments
+    "C0111",
+    "C0103",
+    "R0913",
 ]
 
 [tool.pylint.format]
@@ -93,7 +95,7 @@ max-line-length = 88
 max-attributes = 7
 
 [tool.pytest.ini_options]
-testpaths = [".", "Divine-OS-Lite"]
+testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from cli import cli
+from src.divineos.cli import cli
 from click.testing import CliRunner
 
 
