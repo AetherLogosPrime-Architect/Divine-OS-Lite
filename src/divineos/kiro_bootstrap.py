@@ -95,6 +95,18 @@ class KiroBootstrap:
                 self.orchestrator.rag.load_checkpoint(str(rag_checkpoint))
                 logger.info(f"Loaded RAG state from {rag_checkpoint.name}")
 
+            # Load semantic memory checkpoint
+            semantic_checkpoint = latest_checkpoint.parent / (
+                latest_checkpoint.name.replace(".json", "_semantic.json")
+            )
+            if semantic_checkpoint.exists():
+                self.orchestrator.semantic_memory.load_checkpoint(
+                    str(semantic_checkpoint)
+                )
+                logger.info(
+                    f"Loaded semantic memory from {semantic_checkpoint.name}"
+                )
+
             logger.info("Previous state restored successfully")
 
         except Exception as e:

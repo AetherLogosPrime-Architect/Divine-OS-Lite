@@ -1,16 +1,16 @@
 {
   "episodic": {
-    "55930c58-5933-460d-8bbd-00a35ee365bb": {
-      "id": "55930c58-5933-460d-8bbd-00a35ee365bb",
+    "2e204da1-54c1-4b17-807b-b4829bb40cfa": {
+      "id": "2e204da1-54c1-4b17-807b-b4829bb40cfa",
       "memory_type": "EPISODIC",
       "content": {
         "role": "user",
-        "content": "Test"
+        "content": "Hello Kiro"
       },
-      "timestamp": 1773474846.6472845,
+      "timestamp": 1773474835.987133,
       "importance": 0.8,
       "access_count": 0,
-      "last_accessed": 1773474846.6472845,
+      "last_accessed": 1773474835.987133,
       "tags": [
         "message",
         "user"
@@ -20,5 +20,5 @@
   },
   "semantic": {},
   "procedural": {},
-  "timestamp": 1773474846.648882
+  "timestamp": 1773474835.9945898
 }
