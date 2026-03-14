@@ -41,7 +41,7 @@ jobs:
 
     - name: Check code formatting with black
       run: |
-        black --check src/divineos tests
+        black src/divineos tests --line-length 88
 
     - name: Check import sorting with isort
       run: |

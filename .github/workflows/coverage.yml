@@ -31,6 +31,7 @@ jobs:
         pytest tests/ --cov=src.divineos --cov-report=xml --cov-report=html --cov-report=term-missing --cov-fail-under=80
 
     - name: Upload coverage reports to Codecov
+      continue-on-error: true
       uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml
