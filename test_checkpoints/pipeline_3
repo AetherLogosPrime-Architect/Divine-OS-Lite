@@ -1,0 +1,61 @@
+{
+  "episodic": {
+    "b9e8b8a1-d158-4cc9-9316-b398623e8ee5": {
+      "id": "b9e8b8a1-d158-4cc9-9316-b398623e8ee5",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Input 0",
+        "message_id": 1
+      },
+      "timestamp": 1773475087.1732635,
+      "importance": 0.7,
+      "access_count": 0,
+      "last_accessed": 1773475087.1732638,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    },
+    "96ae3056-5e5c-4d81-8e96-4a22be7686cf": {
+      "id": "96ae3056-5e5c-4d81-8e96-4a22be7686cf",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Input 1",
+        "message_id": 2
+      },
+      "timestamp": 1773475087.1747913,
+      "importance": 0.7,
+      "access_count": 0,
+      "last_accessed": 1773475087.1747916,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    },
+    "a9ed4815-63ca-4778-bd78-165544d8eeb2": {
+      "id": "a9ed4815-63ca-4778-bd78-165544d8eeb2",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Input 2",
+        "message_id": 3
+      },
+      "timestamp": 1773475087.1764982,
+      "importance": 0.7,
+      "access_count": 0,
+      "last_accessed": 1773475087.1764984,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    }
+  },
+  "semantic": {},
+  "procedural": {},
+  "timestamp": 1773475087.1772223
+}

@@ -1,0 +1,150 @@
+{
+  "episodic": {
+    "29432ddd-fc58-48c8-a4ae-27bbe54e396f": {
+      "id": "29432ddd-fc58-48c8-a4ae-27bbe54e396f",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Test input"
+      },
+      "timestamp": 1773475087.1936727,
+      "importance": 0.8,
+      "access_count": 1,
+      "last_accessed": 1773475087.193683,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    },
+    "a3712002-aaa0-4240-b623-abdf8163ae59": {
+      "id": "a3712002-aaa0-4240-b623-abdf8163ae59",
+      "memory_type": "EPISODIC",
+      "content": {
+        "type": "feeling",
+        "valence": 0.5,
+        "arousal": 0.5,
+        "input": "Test input"
+      },
+      "timestamp": 1773475087.1936865,
+      "importance": 0.6,
+      "access_count": 0,
+      "last_accessed": 1773475087.1936867,
+      "tags": [
+        "feeling",
+        "emotional_response"
+      ],
+      "associations": []
+    },
+    "6791cc8f-d260-4ec2-9a30-bd60514c4acf": {
+      "id": "6791cc8f-d260-4ec2-9a30-bd60514c4acf",
+      "memory_type": "EPISODIC",
+      "content": {
+        "type": "execution",
+        "input": "Test input",
+        "status": "acknowledged"
+      },
+      "timestamp": 1773475087.193708,
+      "importance": 0.7,
+      "access_count": 0,
+      "last_accessed": 1773475087.193708,
+      "tags": [
+        "execution",
+        "action"
+      ],
+      "associations": []
+    },
+    "089f95e7-7a25-4144-9b74-529032cbf532": {
+      "id": "089f95e7-7a25-4144-9b74-529032cbf532",
+      "memory_type": "EPISODIC",
+      "content": {
+        "type": "integration",
+        "execution_id": 1,
+        "semantic_status": {
+          "status": "ONLINE",
+          "total_memories": 6,
+          "episodic": 3,
+          "semantic": 2,
+          "procedural": 1,
+          "average_importance": 0.73,
+          "tags_indexed": 12,
+          "associations": 0
+        }
+      },
+      "timestamp": 1773475087.1937184,
+      "importance": 0.9,
+      "access_count": 0,
+      "last_accessed": 1773475087.1937184,
+      "tags": [
+        "integration",
+        "checkpoint"
+      ],
+      "associations": []
+    }
+  },
+  "semantic": {
+    "d5c225a0-6fa9-4cd6-bb47-dde3d73c3d77": {
+      "id": "d5c225a0-6fa9-4cd6-bb47-dde3d73c3d77",
+      "memory_type": "SEMANTIC",
+      "content": {
+        "type": "reasoning",
+        "input": "Test input",
+        "context_available": false
+      },
+      "timestamp": 1773475087.1936965,
+      "importance": 0.7,
+      "access_count": 0,
+      "last_accessed": 1773475087.1936967,
+      "tags": [
+        "reasoning",
+        "thought"
+      ],
+      "associations": []
+    },
+    "e772fae8-73a0-450e-b7da-467652c26eee": {
+      "id": "e772fae8-73a0-450e-b7da-467652c26eee",
+      "memory_type": "SEMANTIC",
+      "content": {
+        "type": "reflection",
+        "input": "Test input",
+        "memories_consolidated": 0
+      },
+      "timestamp": 1773475087.1937127,
+      "importance": 0.8,
+      "access_count": 0,
+      "last_accessed": 1773475087.1937127,
+      "tags": [
+        "reflection",
+        "learning"
+      ],
+      "associations": []
+    }
+  },
+  "procedural": {
+    "a2115137-2469-43ba-bcae-7a3384e41b2a": {
+      "id": "a2115137-2469-43ba-bcae-7a3384e41b2a",
+      "memory_type": "PROCEDURAL",
+      "content": {
+        "type": "plan",
+        "goal": "Test input",
+        "plan_details": {
+          "goal": "Test input",
+          "reasoning": "",
+          "status": "created",
+          "steps": [],
+          "progress": 0.0
+        }
+      },
+      "timestamp": 1773475087.1937046,
+      "importance": 0.8,
+      "access_count": 0,
+      "last_accessed": 1773475087.1937046,
+      "tags": [
+        "plan",
+        "procedure"
+      ],
+      "associations": []
+    }
+  },
+  "timestamp": 1773475087.1947548
+}

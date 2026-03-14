@@ -1,0 +1,25 @@
+{
+  "episodic": {
+    "374b515a-f6eb-49a2-99de-094e226d2daf": {
+      "id": "374b515a-f6eb-49a2-99de-094e226d2daf",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Test input",
+        "message_id": 1
+      },
+      "timestamp": 1773475087.193664,
+      "importance": 0.7,
+      "access_count": 0,
+      "last_accessed": 1773475087.1936643,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    }
+  },
+  "semantic": {},
+  "procedural": {},
+  "timestamp": 1773475087.1942205
+}
