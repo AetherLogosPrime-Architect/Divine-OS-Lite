@@ -105,9 +105,7 @@ class TestMessageTokenCounting:
         # Should still have system prompt overhead
         assert tokens > 0
 
-    def test_count_messages_with_empty_content(
-        self, counter: TokenCounter
-    ) -> None:
+    def test_count_messages_with_empty_content(self, counter: TokenCounter) -> None:
         """Test counting messages with empty content."""
         messages = [
             {"role": "user", "content": ""},
@@ -143,14 +141,10 @@ class TestContextUsageTracking:
 
     def test_usage_percent_over_limit(self, counter: TokenCounter) -> None:
         """Test usage percent over context window."""
-        percent = counter.get_context_usage_percent(
-            counter.context_window * 2
-        )
+        percent = counter.get_context_usage_percent(counter.context_window * 2)
         assert percent == 200.0
 
-    def test_should_compress_below_threshold(
-        self, counter: TokenCounter
-    ) -> None:
+    def test_should_compress_below_threshold(self, counter: TokenCounter) -> None:
         """Test should_compress returns False below threshold."""
         tokens = int(counter.context_window * 0.5)  # 50%
         assert counter.should_compress(tokens) is False
@@ -160,16 +154,12 @@ class TestContextUsageTracking:
         tokens = int(counter.context_window * 0.75)  # 75%
         assert counter.should_compress(tokens) is True
 
-    def test_should_compress_above_threshold(
-        self, counter: TokenCounter
-    ) -> None:
+    def test_should_compress_above_threshold(self, counter: TokenCounter) -> None:
         """Test should_compress returns True above threshold."""
         tokens = int(counter.context_window * 0.8)  # 80%
         assert counter.should_compress(tokens) is True
 
-    def test_should_compress_custom_threshold(
-        self, counter: TokenCounter
-    ) -> None:
+    def test_should_compress_custom_threshold(self, counter: TokenCounter) -> None:
         """Test should_compress with custom threshold."""
         tokens = int(counter.context_window * 0.6)  # 60%
         assert counter.should_compress(tokens, threshold_percent=70.0) is False

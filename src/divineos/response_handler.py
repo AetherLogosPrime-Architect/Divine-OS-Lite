@@ -5,7 +5,7 @@ Handles response parsing, tool call extraction, and result formatting.
 
 import re
 import logging
-from typing import Optional, Any
+from typing import Any
 from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)

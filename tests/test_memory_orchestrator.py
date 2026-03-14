@@ -6,7 +6,6 @@ Verify end-to-end memory lifecycle management.
 import pytest
 import tempfile
 import os
-from pathlib import Path
 
 from src.divineos.memory_orchestrator import MemoryOrchestrator
 
@@ -30,6 +29,7 @@ class TestOrchestratorBasics:
         yield path
         # Cleanup
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -38,9 +38,7 @@ class TestOrchestratorBasics:
         self, temp_db: str, temp_checkpoint_dir: str
     ) -> MemoryOrchestrator:
         """Create orchestrator instance."""
-        orch = MemoryOrchestrator(
-            db_path=temp_db, checkpoint_dir=temp_checkpoint_dir
-        )
+        orch = MemoryOrchestrator(db_path=temp_db, checkpoint_dir=temp_checkpoint_dir)
         yield orch
         orch.close()
 
@@ -51,9 +49,7 @@ class TestOrchestratorBasics:
         assert orchestrator.is_loaded is False
         assert orchestrator.compression_count == 0
 
-    def test_init_custom_params(
-        self, temp_db: str, temp_checkpoint_dir: str
-    ) -> None:
+    def test_init_custom_params(self, temp_db: str, temp_checkpoint_dir: str) -> None:
         """Test initialization with custom parameters."""
         orch = MemoryOrchestrator(
             db_path=temp_db,
@@ -86,6 +82,7 @@ class TestLoad:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -94,9 +91,7 @@ class TestLoad:
         self, temp_db: str, temp_checkpoint_dir: str
     ) -> MemoryOrchestrator:
         """Create orchestrator instance."""
-        orch = MemoryOrchestrator(
-            db_path=temp_db, checkpoint_dir=temp_checkpoint_dir
-        )
+        orch = MemoryOrchestrator(db_path=temp_db, checkpoint_dir=temp_checkpoint_dir)
         yield orch
         orch.close()
 
@@ -108,9 +103,7 @@ class TestLoad:
         assert result["messages"] == []
         assert "token_count" in result
 
-    def test_load_sets_is_loaded(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_load_sets_is_loaded(self, orchestrator: MemoryOrchestrator) -> None:
         """Test that load sets is_loaded flag."""
         assert orchestrator.is_loaded is False
         orchestrator.load()
@@ -135,6 +128,7 @@ class TestAddMessage:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -143,23 +137,17 @@ class TestAddMessage:
         self, temp_db: str, temp_checkpoint_dir: str
     ) -> MemoryOrchestrator:
         """Create orchestrator instance."""
-        orch = MemoryOrchestrator(
-            db_path=temp_db, checkpoint_dir=temp_checkpoint_dir
-        )
+        orch = MemoryOrchestrator(db_path=temp_db, checkpoint_dir=temp_checkpoint_dir)
         yield orch
         orch.close()
 
-    def test_add_message_auto_loads(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_add_message_auto_loads(self, orchestrator: MemoryOrchestrator) -> None:
         """Test that add_message auto-loads if needed."""
         assert orchestrator.is_loaded is False
         orchestrator.add_message("user", "Hello")
         assert orchestrator.is_loaded is True
 
-    def test_add_message_returns_result(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_add_message_returns_result(self, orchestrator: MemoryOrchestrator) -> None:
         """Test that add_message returns result dict."""
         result = orchestrator.add_message("user", "Hello")
 
@@ -169,9 +157,7 @@ class TestAddMessage:
         assert "context_usage_percent" in result
         assert "needs_compression" in result
 
-    def test_add_multiple_messages(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_add_multiple_messages(self, orchestrator: MemoryOrchestrator) -> None:
         """Test adding multiple messages."""
         orchestrator.add_message("user", "Hello")
         orchestrator.add_message("assistant", "Hi there")
@@ -198,6 +184,7 @@ class TestCompressionTrigger:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -255,6 +242,7 @@ class TestCompress:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -263,9 +251,7 @@ class TestCompress:
         self, temp_db: str, temp_checkpoint_dir: str
     ) -> MemoryOrchestrator:
         """Create orchestrator instance."""
-        orch = MemoryOrchestrator(
-            db_path=temp_db, checkpoint_dir=temp_checkpoint_dir
-        )
+        orch = MemoryOrchestrator(db_path=temp_db, checkpoint_dir=temp_checkpoint_dir)
         yield orch
         orch.close()
 
@@ -276,9 +262,7 @@ class TestCompress:
 
         assert result["success"] is False
 
-    def test_compress_many_messages(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_compress_many_messages(self, orchestrator: MemoryOrchestrator) -> None:
         """Test compression with many messages."""
         orchestrator.load()
 
@@ -313,6 +297,7 @@ class TestCheckpoint:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -321,15 +306,11 @@ class TestCheckpoint:
         self, temp_db: str, temp_checkpoint_dir: str
     ) -> MemoryOrchestrator:
         """Create orchestrator instance."""
-        orch = MemoryOrchestrator(
-            db_path=temp_db, checkpoint_dir=temp_checkpoint_dir
-        )
+        orch = MemoryOrchestrator(db_path=temp_db, checkpoint_dir=temp_checkpoint_dir)
         yield orch
         orch.close()
 
-    def test_save_checkpoint(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_save_checkpoint(self, orchestrator: MemoryOrchestrator) -> None:
         """Test saving checkpoint."""
         orchestrator.load()
         orchestrator.add_message("user", "Hello")
@@ -340,9 +321,7 @@ class TestCheckpoint:
         assert os.path.exists(result["path"])
         assert orchestrator.checkpoint_count == 1
 
-    def test_save_checkpoint_with_name(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_save_checkpoint_with_name(self, orchestrator: MemoryOrchestrator) -> None:
         """Test saving checkpoint with custom name."""
         orchestrator.load()
 
@@ -369,6 +348,7 @@ class TestStatus:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -377,15 +357,11 @@ class TestStatus:
         self, temp_db: str, temp_checkpoint_dir: str
     ) -> MemoryOrchestrator:
         """Create orchestrator instance."""
-        orch = MemoryOrchestrator(
-            db_path=temp_db, checkpoint_dir=temp_checkpoint_dir
-        )
+        orch = MemoryOrchestrator(db_path=temp_db, checkpoint_dir=temp_checkpoint_dir)
         yield orch
         orch.close()
 
-    def test_status_not_loaded(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_status_not_loaded(self, orchestrator: MemoryOrchestrator) -> None:
         """Test status when not loaded."""
         status = orchestrator.get_status()
 
@@ -402,9 +378,7 @@ class TestStatus:
         assert "tokens_used" in status
         assert "usage_percent" in status
 
-    def test_status_after_operations(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_status_after_operations(self, orchestrator: MemoryOrchestrator) -> None:
         """Test status after various operations."""
         orchestrator.add_message("user", "Hello")
         orchestrator.add_message("assistant", "Hi")
@@ -434,6 +408,7 @@ class TestRecentContext:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -442,15 +417,11 @@ class TestRecentContext:
         self, temp_db: str, temp_checkpoint_dir: str
     ) -> MemoryOrchestrator:
         """Create orchestrator instance."""
-        orch = MemoryOrchestrator(
-            db_path=temp_db, checkpoint_dir=temp_checkpoint_dir
-        )
+        orch = MemoryOrchestrator(db_path=temp_db, checkpoint_dir=temp_checkpoint_dir)
         yield orch
         orch.close()
 
-    def test_get_recent_context_empty(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_get_recent_context_empty(self, orchestrator: MemoryOrchestrator) -> None:
         """Test getting recent context when empty."""
         context = orchestrator.get_recent_context(10)
         assert context == []
@@ -464,9 +435,7 @@ class TestRecentContext:
         context = orchestrator.get_recent_context(10)
         assert len(context) > 0
 
-    def test_get_recent_context_limited(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_get_recent_context_limited(self, orchestrator: MemoryOrchestrator) -> None:
         """Test limiting recent context."""
         for i in range(20):
             orchestrator.add_message("user", f"Message {i}")
@@ -493,6 +462,7 @@ class TestReset:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -501,15 +471,11 @@ class TestReset:
         self, temp_db: str, temp_checkpoint_dir: str
     ) -> MemoryOrchestrator:
         """Create orchestrator instance."""
-        orch = MemoryOrchestrator(
-            db_path=temp_db, checkpoint_dir=temp_checkpoint_dir
-        )
+        orch = MemoryOrchestrator(db_path=temp_db, checkpoint_dir=temp_checkpoint_dir)
         yield orch
         orch.close()
 
-    def test_reset_clears_state(
-        self, orchestrator: MemoryOrchestrator
-    ) -> None:
+    def test_reset_clears_state(self, orchestrator: MemoryOrchestrator) -> None:
         """Test that reset clears state."""
         orchestrator.add_message("user", "Hello")
         orchestrator.save_checkpoint()

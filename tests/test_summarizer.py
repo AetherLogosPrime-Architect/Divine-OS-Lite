@@ -52,10 +52,7 @@ class TestSummarizeMessages:
 
     def test_summarize_many_messages(self, summarizer: Summarizer) -> None:
         """Test summarizing many messages."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(20)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(20)]
 
         result = summarizer.summarize_messages(messages, keep_recent=5)
 
@@ -100,14 +97,9 @@ class TestSummarizeMessages:
         assert recent[0]["content"] == "Recent response 1"
         assert recent[1]["content"] == "Recent message 2"
 
-    def test_compression_ratio_calculated(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_compression_ratio_calculated(self, summarizer: Summarizer) -> None:
         """Test that compression ratio is calculated."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(20)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(20)]
 
         result = summarizer.summarize_messages(messages, keep_recent=5)
 
@@ -117,10 +109,7 @@ class TestSummarizeMessages:
 
     def test_messages_compressed_count(self, summarizer: Summarizer) -> None:
         """Test that messages_compressed count is accurate."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(20)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(20)]
 
         result = summarizer.summarize_messages(messages, keep_recent=5)
 
@@ -129,10 +118,7 @@ class TestSummarizeMessages:
 
     def test_summary_count_increments(self, summarizer: Summarizer) -> None:
         """Test that summary_count increments."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(20)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(20)]
 
         assert summarizer.summary_count == 0
 
@@ -171,9 +157,7 @@ class TestCreateSummary:
         assert "is_summary" in summary
         assert summary["is_summary"] is True
 
-    def test_summary_includes_conversation_info(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_summary_includes_conversation_info(self, summarizer: Summarizer) -> None:
         """Test that summary includes conversation info."""
         messages = [
             {"role": "user", "content": "First message"},
@@ -204,9 +188,7 @@ class TestExtractKeyPoints:
         result = summarizer.extract_key_points([])
         assert result == []
 
-    def test_extract_key_points_no_important(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_extract_key_points_no_important(self, summarizer: Summarizer) -> None:
         """Test extracting when no important content."""
         messages = [
             {"role": "user", "content": "Hi"},
@@ -217,9 +199,7 @@ class TestExtractKeyPoints:
         # Short messages won't be extracted
         assert len(result) == 0
 
-    def test_extract_key_points_with_important(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_extract_key_points_with_important(self, summarizer: Summarizer) -> None:
         """Test extracting important key points."""
         messages = [
             {
@@ -248,9 +228,7 @@ class TestExtractKeyPoints:
         result = summarizer.extract_key_points(messages)
         assert len(result) <= 10
 
-    def test_extract_key_points_includes_role(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_extract_key_points_includes_role(self, summarizer: Summarizer) -> None:
         """Test that extracted points include role."""
         messages = [
             {
@@ -272,21 +250,14 @@ class TestSummaryStats:
         """Create summarizer instance."""
         return Summarizer()
 
-    def test_get_summary_stats_initial(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_get_summary_stats_initial(self, summarizer: Summarizer) -> None:
         """Test initial summary stats."""
         stats = summarizer.get_summary_stats()
         assert stats["total_summaries_created"] == 0
 
-    def test_get_summary_stats_after_summarize(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_get_summary_stats_after_summarize(self, summarizer: Summarizer) -> None:
         """Test summary stats after summarization."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(20)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(20)]
 
         summarizer.summarize_messages(messages, keep_recent=5)
         stats = summarizer.get_summary_stats()
@@ -295,10 +266,7 @@ class TestSummaryStats:
 
     def test_reset_stats(self, summarizer: Summarizer) -> None:
         """Test resetting statistics."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(20)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(20)]
 
         summarizer.summarize_messages(messages, keep_recent=5)
         assert summarizer.summary_count == 1
@@ -317,24 +285,16 @@ class TestCompressionRatio:
 
     def test_compression_ratio_10_to_6(self, summarizer: Summarizer) -> None:
         """Test compression ratio for 10 → 6 messages."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(10)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(10)]
 
         result = summarizer.summarize_messages(messages, keep_recent=5)
 
         # 10 → 6 = 40% reduction
         assert 39 < result["compression_ratio"] < 41
 
-    def test_compression_ratio_100_to_6(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_compression_ratio_100_to_6(self, summarizer: Summarizer) -> None:
         """Test compression ratio for 100 → 6 messages."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(100)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(100)]
 
         result = summarizer.summarize_messages(messages, keep_recent=5)
 
@@ -350,18 +310,14 @@ class TestAlternatingRoles:
         """Create summarizer instance."""
         return Summarizer()
 
-    def test_alternating_user_assistant(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_alternating_user_assistant(self, summarizer: Summarizer) -> None:
         """Test summarizing alternating user/assistant messages."""
         messages = []
         for i in range(10):
             if i % 2 == 0:
                 messages.append({"role": "user", "content": f"User {i}"})
             else:
-                messages.append(
-                    {"role": "assistant", "content": f"Assistant {i}"}
-                )
+                messages.append({"role": "assistant", "content": f"Assistant {i}"})
 
         result = summarizer.summarize_messages(messages, keep_recent=2)
 
@@ -396,10 +352,7 @@ class TestEdgeCases:
 
     def test_keep_recent_zero(self, summarizer: Summarizer) -> None:
         """Test with keep_recent=0."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(10)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(10)]
 
         result = summarizer.summarize_messages(messages, keep_recent=0)
 
@@ -408,14 +361,9 @@ class TestEdgeCases:
         assert len(result["messages"]) == 2
         assert result["messages"][0]["role"] == "system"
 
-    def test_keep_recent_equals_message_count(
-        self, summarizer: Summarizer
-    ) -> None:
+    def test_keep_recent_equals_message_count(self, summarizer: Summarizer) -> None:
         """Test when keep_recent equals message count."""
-        messages = [
-            {"role": "user", "content": f"Message {i}"}
-            for i in range(5)
-        ]
+        messages = [{"role": "user", "content": f"Message {i}"} for i in range(5)]
 
         result = summarizer.summarize_messages(messages, keep_recent=5)
 

@@ -5,7 +5,7 @@ Handles loading, saving, and compression of conversation memory.
 
 import json
 import logging
-from typing import Optional, Any
+from typing import Any
 from datetime import datetime
 from pathlib import Path
 
@@ -48,9 +48,7 @@ class MemoryManager:
             Dictionary with messages and metadata
         """
         messages = self.memory.get_all_messages()
-        self.current_tokens = self.token_counter.count_messages_tokens(
-            messages
-        )
+        self.current_tokens = self.token_counter.count_messages_tokens(messages)
 
         return {
             "messages": messages,
@@ -107,9 +105,7 @@ class MemoryManager:
         usage_percent = self.token_counter.get_context_usage_percent(
             self.current_tokens
         )
-        remaining = self.token_counter.get_remaining_tokens(
-            self.current_tokens
-        )
+        remaining = self.token_counter.get_remaining_tokens(self.current_tokens)
         compression_target = self.token_counter.get_compression_target(
             self.current_tokens
         )
@@ -203,18 +199,14 @@ class MemoryManager:
             Dictionary with stats
         """
         messages = self.memory.get_all_messages()
-        total_content_length = sum(
-            len(msg.get("content", "")) for msg in messages
-        )
+        total_content_length = sum(len(msg.get("content", "")) for msg in messages)
 
         return {
             "total_messages": len(messages),
             "total_tokens": self.current_tokens,
             "total_content_chars": total_content_length,
             "avg_message_length": (
-                total_content_length // len(messages)
-                if messages
-                else 0
+                total_content_length // len(messages) if messages else 0
             ),
             "context_usage_percent": self.token_counter.get_context_usage_percent(
                 self.current_tokens

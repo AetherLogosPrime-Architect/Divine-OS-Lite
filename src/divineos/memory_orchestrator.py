@@ -151,29 +151,23 @@ class MemoryOrchestrator:
 
         # Update memory with compressed messages
         # Clear old messages and add compressed ones
-        self.memory_manager.memory.conn.execute(
-            "DELETE FROM messages"
-        )
+        self.memory_manager.memory.conn.execute("DELETE FROM messages")
         self.memory_manager.memory.conn.commit()
 
         for msg in compressed_messages:
             if msg.get("is_summary"):
                 # Add summary as system message
-                self.memory_manager.memory.add_message(
-                    msg["role"], msg["content"]
-                )
+                self.memory_manager.memory.add_message(msg["role"], msg["content"])
             else:
                 # Add regular message
-                self.memory_manager.memory.add_message(
-                    msg["role"], msg["content"]
-                )
+                self.memory_manager.memory.add_message(msg["role"], msg["content"])
 
         # Reload messages
         self.messages = self.memory_manager.memory.get_all_messages()
 
         # Update token count
-        self.memory_manager.current_tokens = (
-            self.token_counter.count_messages_tokens(self.messages)
+        self.memory_manager.current_tokens = self.token_counter.count_messages_tokens(
+            self.messages
         )
 
         self.compression_count += 1
@@ -188,7 +182,8 @@ class MemoryOrchestrator:
 
         return {
             "success": True,
-            "messages_before": len(self.messages) + summary_result["messages_compressed"],
+            "messages_before": len(self.messages)
+            + summary_result["messages_compressed"],
             "messages_after": len(self.messages),
             "compression_ratio": compression_ratio,
             "tokens_before": status["tokens_used"],
@@ -214,9 +209,7 @@ class MemoryOrchestrator:
         if not name:
             name = f"checkpoint_{self.checkpoint_count:04d}.json"
 
-        checkpoint_path = str(
-            Path(self.checkpoint_dir) / name
-        )
+        checkpoint_path = str(Path(self.checkpoint_dir) / name)
 
         # Save checkpoint
         checkpoint = self.memory_manager.save_checkpoint(checkpoint_path)
@@ -247,7 +240,6 @@ class MemoryOrchestrator:
 
         context_status = self.memory_manager.get_context_status()
         summary_stats = self.summarizer.get_summary_stats()
-        memory_stats = self.memory_manager.get_summary_stats()
 
         return {
             "is_loaded": True,

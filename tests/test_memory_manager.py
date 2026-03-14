@@ -7,7 +7,6 @@ import pytest
 import tempfile
 import os
 import json
-from pathlib import Path
 
 from src.divineos.memory_manager import MemoryManager
 
@@ -45,9 +44,7 @@ class TestMemoryManagerBasics:
 
     def test_init_custom_threshold(self, temp_db: str) -> None:
         """Test initialization with custom threshold."""
-        manager = MemoryManager(
-            db_path=temp_db, compression_threshold=60.0
-        )
+        manager = MemoryManager(db_path=temp_db, compression_threshold=60.0)
         assert manager.compression_threshold == 60.0
         manager.close()
 
@@ -79,9 +76,7 @@ class TestLoadMemory:
         assert "timestamp" in result
         assert result["model"] == "claude-3-5-sonnet"
 
-    def test_load_memory_with_messages(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_load_memory_with_messages(self, manager: MemoryManager) -> None:
         """Test loading memory with messages."""
         manager.add_message("user", "Hello")
         manager.add_message("assistant", "Hi there!")
@@ -91,9 +86,7 @@ class TestLoadMemory:
         assert result["messages"][0]["role"] == "user"
         assert result["messages"][1]["role"] == "assistant"
 
-    def test_load_memory_updates_tokens(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_load_memory_updates_tokens(self, manager: MemoryManager) -> None:
         """Test that load_memory updates token count."""
         manager.add_message("user", "Test message")
 
@@ -138,17 +131,13 @@ class TestAddMessage:
         assert id2 > id1
         assert id3 > id2
 
-    def test_add_message_increases_tokens(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_add_message_increases_tokens(self, manager: MemoryManager) -> None:
         """Test that adding messages increases token count."""
         initial = manager.current_tokens
         manager.add_message("user", "Test")
         assert manager.current_tokens > initial
 
-    def test_add_longer_message_more_tokens(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_add_longer_message_more_tokens(self, manager: MemoryManager) -> None:
         """Test that longer messages use more tokens."""
         manager.add_message("user", "Hi")
         tokens_after_short = manager.current_tokens
@@ -174,44 +163,28 @@ class TestCompressionDetection:
     @pytest.fixture
     def manager(self, temp_db: str) -> MemoryManager:
         """Create memory manager instance."""
-        mgr = MemoryManager(
-            db_path=temp_db, compression_threshold=75.0
-        )
+        mgr = MemoryManager(db_path=temp_db, compression_threshold=75.0)
         yield mgr
         mgr.close()
 
-    def test_no_compression_needed_initially(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_no_compression_needed_initially(self, manager: MemoryManager) -> None:
         """Test no compression needed initially."""
         assert manager.check_compression_needed() is False
 
-    def test_compression_needed_at_threshold(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_compression_needed_at_threshold(self, manager: MemoryManager) -> None:
         """Test compression detection at threshold."""
         # Simulate high token usage
-        manager.current_tokens = int(
-            manager.token_counter.context_window * 0.75
-        )
+        manager.current_tokens = int(manager.token_counter.context_window * 0.75)
         assert manager.check_compression_needed() is True
 
-    def test_compression_needed_above_threshold(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_compression_needed_above_threshold(self, manager: MemoryManager) -> None:
         """Test compression detection above threshold."""
-        manager.current_tokens = int(
-            manager.token_counter.context_window * 0.8
-        )
+        manager.current_tokens = int(manager.token_counter.context_window * 0.8)
         assert manager.check_compression_needed() is True
 
-    def test_no_compression_below_threshold(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_no_compression_below_threshold(self, manager: MemoryManager) -> None:
         """Test no compression below threshold."""
-        manager.current_tokens = int(
-            manager.token_counter.context_window * 0.5
-        )
+        manager.current_tokens = int(manager.token_counter.context_window * 0.5)
         assert manager.check_compression_needed() is False
 
 
@@ -234,9 +207,7 @@ class TestContextStatus:
         yield mgr
         mgr.close()
 
-    def test_context_status_structure(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_context_status_structure(self, manager: MemoryManager) -> None:
         """Test context status has required fields."""
         status = manager.get_context_status()
 
@@ -329,9 +300,7 @@ class TestCheckpoints:
         assert loaded["message_count"] == 1
         assert len(loaded["messages"]) == 1
 
-    def test_load_nonexistent_checkpoint(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_load_nonexistent_checkpoint(self, manager: MemoryManager) -> None:
         """Test loading nonexistent checkpoint."""
         loaded = manager.load_checkpoint("/nonexistent/path.json")
         assert loaded == {}
@@ -356,16 +325,12 @@ class TestRecentMessages:
         yield mgr
         mgr.close()
 
-    def test_get_recent_messages_empty(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_get_recent_messages_empty(self, manager: MemoryManager) -> None:
         """Test getting recent messages from empty memory."""
         recent = manager.get_recent_messages(10)
         assert recent == []
 
-    def test_get_recent_messages_all(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_get_recent_messages_all(self, manager: MemoryManager) -> None:
         """Test getting all recent messages."""
         manager.add_message("user", "1")
         manager.add_message("assistant", "2")
@@ -374,9 +339,7 @@ class TestRecentMessages:
         recent = manager.get_recent_messages(10)
         assert len(recent) == 3
 
-    def test_get_recent_messages_limited(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_get_recent_messages_limited(self, manager: MemoryManager) -> None:
         """Test getting limited recent messages."""
         for i in range(20):
             manager.add_message("user" if i % 2 == 0 else "assistant", f"msg{i}")
@@ -404,9 +367,7 @@ class TestSummaryStats:
         yield mgr
         mgr.close()
 
-    def test_summary_stats_structure(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_summary_stats_structure(self, manager: MemoryManager) -> None:
         """Test summary stats has required fields."""
         stats = manager.get_summary_stats()
 
@@ -425,9 +386,7 @@ class TestSummaryStats:
         assert stats["total_tokens"] >= 0
         assert stats["total_content_chars"] == 0
 
-    def test_summary_stats_with_messages(
-        self, manager: MemoryManager
-    ) -> None:
+    def test_summary_stats_with_messages(self, manager: MemoryManager) -> None:
         """Test summary stats with messages."""
         manager.add_message("user", "Hello world")
         manager.add_message("assistant", "Hi there!")

@@ -87,14 +87,9 @@ class TestToolCallExtraction:
         assert result["tool_calls"][0].tool_name == "search"
         assert result["tool_calls"][0].parameters["query"] == "test"
 
-    def test_extract_multiple_tool_calls(
-        self, handler: ResponseHandler
-    ) -> None:
+    def test_extract_multiple_tool_calls(self, handler: ResponseHandler) -> None:
         """Test extracting multiple tool calls."""
-        response = (
-            "First TOOL: search(query=test) "
-            "then TOOL: analyze(data=result)"
-        )
+        response = "First TOOL: search(query=test) " "then TOOL: analyze(data=result)"
         result = handler.parse_response(response)
 
         assert len(result["tool_calls"]) == 2
@@ -137,30 +132,30 @@ class TestParameterParsing:
 
     def test_parse_string_param(self, handler: ResponseHandler) -> None:
         """Test parsing string parameter."""
-        params = handler._parse_parameters('query=test')
+        params = handler._parse_parameters("query=test")
         assert params["query"] == "test"
 
     def test_parse_int_param(self, handler: ResponseHandler) -> None:
         """Test parsing integer parameter."""
-        params = handler._parse_parameters('limit=10')
+        params = handler._parse_parameters("limit=10")
         assert params["limit"] == 10
         assert isinstance(params["limit"], int)
 
     def test_parse_float_param(self, handler: ResponseHandler) -> None:
         """Test parsing float parameter."""
-        params = handler._parse_parameters('threshold=0.5')
+        params = handler._parse_parameters("threshold=0.5")
         assert params["threshold"] == 0.5
         assert isinstance(params["threshold"], float)
 
     def test_parse_bool_param(self, handler: ResponseHandler) -> None:
         """Test parsing boolean parameter."""
-        params = handler._parse_parameters('enabled=true, disabled=false')
+        params = handler._parse_parameters("enabled=true, disabled=false")
         assert params["enabled"] is True
         assert params["disabled"] is False
 
     def test_parse_none_param(self, handler: ResponseHandler) -> None:
         """Test parsing None parameter."""
-        params = handler._parse_parameters('value=None')
+        params = handler._parse_parameters("value=None")
         assert params["value"] is None
 
     def test_parse_quoted_string(self, handler: ResponseHandler) -> None:
@@ -170,16 +165,14 @@ class TestParameterParsing:
 
     def test_parse_multiple_params(self, handler: ResponseHandler) -> None:
         """Test parsing multiple parameters."""
-        params = handler._parse_parameters(
-            'name=test, count=5, enabled=true'
-        )
+        params = handler._parse_parameters("name=test, count=5, enabled=true")
         assert params["name"] == "test"
         assert params["count"] == 5
         assert params["enabled"] is True
 
     def test_parse_empty_params(self, handler: ResponseHandler) -> None:
         """Test parsing empty parameters."""
-        params = handler._parse_parameters('')
+        params = handler._parse_parameters("")
         assert params == {}
 
 
@@ -251,13 +244,10 @@ class TestTextExtraction:
         assert "Let me look" in text
         assert "Found it" in text
 
-    def test_extract_text_multiple_tools(
-        self, handler: ResponseHandler
-    ) -> None:
+    def test_extract_text_multiple_tools(self, handler: ResponseHandler) -> None:
         """Test extracting text with multiple tool calls."""
         response = (
-            "First TOOL: search(query=test) "
-            "then TOOL: analyze(data=result) done"
+            "First TOOL: search(query=test) " "then TOOL: analyze(data=result) done"
         )
         text = handler._extract_text(response)
         assert "TOOL:" not in text
@@ -284,18 +274,14 @@ class TestToolResultFormatting:
 
     def test_format_dict_result(self, handler: ResponseHandler) -> None:
         """Test formatting dict result."""
-        result = handler.format_tool_result(
-            "search", {"count": 5, "items": ["a", "b"]}
-        )
+        result = handler.format_tool_result("search", {"count": 5, "items": ["a", "b"]})
 
         assert "[TOOL RESULT]" in result
         assert "search" in result
 
     def test_format_failed_result(self, handler: ResponseHandler) -> None:
         """Test formatting failed result."""
-        result = handler.format_tool_result(
-            "search", "Error occurred", success=False
-        )
+        result = handler.format_tool_result("search", "Error occurred", success=False)
 
         assert "FAILED" in result
         assert "Error occurred" in result

@@ -3,7 +3,6 @@ Token counting for Claude and other LLM models.
 Provides accurate token counts for context window management.
 """
 
-from typing import Optional
 import logging
 
 logger = logging.getLogger(__name__)
@@ -83,7 +82,6 @@ class TokenCounter:
         total += 50  # System prompt overhead
 
         for msg in messages:
-            role = msg.get("role", "")
             content = msg.get("content", "")
 
             # Count content tokens

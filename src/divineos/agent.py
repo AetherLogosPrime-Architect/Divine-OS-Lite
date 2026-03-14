@@ -63,9 +63,7 @@ class Agent:
             model=model,
         )
 
-        logger.info(
-            f"Agent '{name}' initialized with model {model}"
-        )
+        logger.info(f"Agent '{name}' initialized with model {model}")
 
     def register_tool(self, tool: Tool) -> None:
         """
@@ -92,9 +90,7 @@ class Agent:
 
         descriptions = []
         for name, tool in self.tools.items():
-            descriptions.append(
-                f"- {name}: {tool.description}"
-            )
+            descriptions.append(f"- {name}: {tool.description}")
 
         return "\n".join(descriptions)
 
@@ -113,7 +109,8 @@ class Agent:
             f"You have access to a persistent memory system that maintains "
             f"conversation history and context. Use it to maintain state across "
             f"interactions.\n\n"
-            f"When you need to use a tool, respond with: TOOL: tool_name(param1=value1, param2=value2)\n"
+            f"When you need to use a tool, respond with: "
+            f"TOOL: tool_name(param1=value1, param2=value2)\n"
             f"The system will execute the tool and provide results."
         )
 

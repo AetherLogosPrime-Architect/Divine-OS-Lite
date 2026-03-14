@@ -32,9 +32,7 @@ class TestCLIInit:
             runner.invoke(cli, ["init", "--db", "test.db"])
             conn = sqlite3.connect("test.db")
             cursor = conn.cursor()
-            cursor.execute(
-                "SELECT name FROM sqlite_master WHERE type='table'"
-            )
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
             tables = {row[0] for row in cursor.fetchall()}
             assert "messages" in tables
             assert "tool_calls" in tables

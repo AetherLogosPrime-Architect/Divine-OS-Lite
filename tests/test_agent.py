@@ -6,7 +6,6 @@ Verify agent initialization, tool management, and memory integration.
 import pytest
 import tempfile
 import os
-from pathlib import Path
 
 from src.divineos.agent import Agent, Tool
 
@@ -16,6 +15,7 @@ class TestToolDefinition:
 
     def test_tool_creation(self) -> None:
         """Test creating a tool."""
+
         def dummy_handler(x: int) -> int:
             return x * 2
 
@@ -79,6 +79,7 @@ class TestAgentBasics:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -126,6 +127,7 @@ class TestToolRegistration:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -202,6 +204,7 @@ class TestToolsDescription:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -250,6 +253,7 @@ class TestSystemPrompt:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -294,6 +298,7 @@ class TestMessages:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -344,6 +349,7 @@ class TestToolCalls:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -376,6 +382,7 @@ class TestToolCalls:
 
     def test_tool_error_handling(self, agent: Agent) -> None:
         """Test tool error handling."""
+
         def failing_tool() -> None:
             raise RuntimeError("Tool failed")
 
@@ -409,6 +416,7 @@ class TestContext:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -451,6 +459,7 @@ class TestStatus:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -510,6 +519,7 @@ class TestCheckpoint:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 
@@ -548,6 +558,7 @@ class TestReset:
         path = tempfile.mkdtemp()
         yield path
         import shutil
+
         if os.path.exists(path):
             shutil.rmtree(path)
 

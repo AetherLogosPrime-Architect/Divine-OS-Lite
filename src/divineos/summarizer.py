@@ -17,9 +17,7 @@ class Summarizer:
         """Initialize summarizer."""
         self.summary_count = 0
 
-    def summarize_messages(
-        self, messages: list[dict], keep_recent: int = 5
-    ) -> dict:
+    def summarize_messages(self, messages: list[dict], keep_recent: int = 5) -> dict:
         """
         Summarize old messages, keeping recent ones verbatim.
 
@@ -109,9 +107,7 @@ class Summarizer:
 
         # Extract conversation flow
         user_count = sum(1 for m in messages if m.get("role") == "user")
-        assistant_count = sum(
-            1 for m in messages if m.get("role") == "assistant"
-        )
+        assistant_count = sum(1 for m in messages if m.get("role") == "assistant")
 
         # Get first and last messages for context
         first_msg = messages[0].get("content", "")[:100]
@@ -161,25 +157,20 @@ class Summarizer:
                     continue
 
                 # Heuristics for important content
-                is_important = (
-                    len(sentence) > 20  # Not too short
-                    and any(
-                        word in sentence.lower()
-                        for word in [
-                            "important",
-                            "key",
-                            "must",
-                            "critical",
-                            "decision",
-                            "conclusion",
-                        ]
-                    )
+                is_important = len(sentence) > 20 and any(  # Not too short
+                    word in sentence.lower()
+                    for word in [
+                        "important",
+                        "key",
+                        "must",
+                        "critical",
+                        "decision",
+                        "conclusion",
+                    ]
                 )
 
                 if is_important:
-                    key_points.append(
-                        f"[{role.upper()}] {sentence.strip()}"
-                    )
+                    key_points.append(f"[{role.upper()}] {sentence.strip()}")
 
         return key_points[:10]  # Limit to 10 key points
 
