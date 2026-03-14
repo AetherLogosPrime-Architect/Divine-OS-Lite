@@ -37,8 +37,8 @@ class TestEvalMetric:
             EvalMetric(name="", value=0.9, threshold=0.8)
 
 
-class TestTestCase:
-    """Tests for TestCase class."""
+class TestEvalTestCase:
+    """Tests for EvalTestCase class."""
 
     def test_init(self) -> None:
         """Test test case initialization."""
@@ -241,10 +241,14 @@ class TestEvaluationRunner:
             expected_output="result",
         )
 
-        def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+        def evaluator(
+            actual: str, expected: str
+        ) -> tuple[bool, list[EvalMetric]]:
             passed = actual == expected
-            metrics = [EvalMetric(name="match", value=1.0 if passed else 0.0, threshold=0.5)]
-            return passed, metrics
+            metric = EvalMetric(
+                name="match", value=1.0 if passed else 0.0, threshold=0.5
+            )
+            return passed, [metric]
 
         result = runner.run_test_case(tc, evaluator)
         assert result.status == EvalStatus.PASSED
@@ -260,10 +264,14 @@ class TestEvaluationRunner:
             expected_output="result",
         )
 
-        def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+        def evaluator(
+            actual: str, expected: str
+        ) -> tuple[bool, list[EvalMetric]]:
             passed = actual == expected
-            metrics = [EvalMetric(name="match", value=1.0 if passed else 0.0, threshold=0.5)]
-            return passed, metrics
+            metric = EvalMetric(
+                name="match", value=1.0 if passed else 0.0, threshold=0.5
+            )
+            return passed, [metric]
 
         result = runner.run_test_case(tc, evaluator)
         assert result.status == EvalStatus.FAILED
@@ -278,7 +286,9 @@ class TestEvaluationRunner:
             expected_output="result",
         )
 
-        def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+        def evaluator(
+            actual: str, expected: str
+        ) -> tuple[bool, list[EvalMetric]]:
             raise ValueError("Test error")
 
         result = runner.run_test_case(tc, evaluator)
@@ -305,10 +315,14 @@ class TestEvaluationRunner:
         suite.add_test_case(tc2)
         runner.register_suite(suite)
 
-        def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+        def evaluator(
+            actual: str, expected: str
+        ) -> tuple[bool, list[EvalMetric]]:
             passed = actual == expected
-            metrics = [EvalMetric(name="match", value=1.0 if passed else 0.0, threshold=0.5)]
-            return passed, metrics
+            metric = EvalMetric(
+                name="match", value=1.0 if passed else 0.0, threshold=0.5
+            )
+            return passed, [metric]
 
         results = runner.run_suite(suite.suite_id, evaluator)
         assert len(results) == 2
@@ -323,10 +337,14 @@ class TestEvaluationRunner:
             expected_output="result",
         )
 
-        def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+        def evaluator(
+            actual: str, expected: str
+        ) -> tuple[bool, list[EvalMetric]]:
             passed = actual == expected
-            metrics = [EvalMetric(name="match", value=1.0 if passed else 0.0, threshold=0.5)]
-            return passed, metrics
+            metric = EvalMetric(
+                name="match", value=1.0 if passed else 0.0, threshold=0.5
+            )
+            return passed, [metric]
 
         runner.run_test_case(tc, evaluator)
         results = runner.get_results()
@@ -348,10 +366,14 @@ class TestEvaluationRunner:
             expected_output="result",
         )
 
-        def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+        def evaluator(
+            actual: str, expected: str
+        ) -> tuple[bool, list[EvalMetric]]:
             passed = actual == expected
-            metrics = [EvalMetric(name="match", value=1.0 if passed else 0.0, threshold=0.5)]
-            return passed, metrics
+            metric = EvalMetric(
+                name="match", value=1.0 if passed else 0.0, threshold=0.5
+            )
+            return passed, [metric]
 
         runner.run_test_case(tc1, evaluator)
         runner.run_test_case(tc2, evaluator)
@@ -377,10 +399,14 @@ class TestEvaluationRunner:
             expected_output="result",
         )
 
-        def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+        def evaluator(
+            actual: str, expected: str
+        ) -> tuple[bool, list[EvalMetric]]:
             passed = actual == expected
-            metrics = [EvalMetric(name="match", value=1.0 if passed else 0.0, threshold=0.5)]
-            return passed, metrics
+            metric = EvalMetric(
+                name="match", value=1.0 if passed else 0.0, threshold=0.5
+            )
+            return passed, [metric]
 
         runner.run_test_case(tc1, evaluator)
         runner.run_test_case(tc2, evaluator)
@@ -401,10 +427,14 @@ class TestEvaluationRunner:
             expected_output="result",
         )
 
-        def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+        def evaluator(
+            actual: str, expected: str
+        ) -> tuple[bool, list[EvalMetric]]:
             passed = actual == expected
-            metrics = [EvalMetric(name="match", value=1.0 if passed else 0.0, threshold=0.5)]
-            return passed, metrics
+            metric = EvalMetric(
+                name="match", value=1.0 if passed else 0.0, threshold=0.5
+            )
+            return passed, [metric]
 
         runner.run_test_case(tc, evaluator)
         runner.clear_results()
@@ -421,10 +451,16 @@ class TestEvaluationRunner:
                 expected_output="result",
             )
 
-            def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+            def evaluator(
+                actual: str, expected: str
+            ) -> tuple[bool, list[EvalMetric]]:
                 passed = actual == expected
-                metrics = [EvalMetric(name="match", value=1.0 if passed else 0.0, threshold=0.5)]
-                return passed, metrics
+                metric = EvalMetric(
+                    name="match",
+                    value=1.0 if passed else 0.0,
+                    threshold=0.5,
+                )
+                return passed, [metric]
 
             runner.run_test_case(tc, evaluator)
             filepath = str(Path(tmpdir) / "results.json")
@@ -443,10 +479,16 @@ class TestEvaluationRunner:
                 expected_output="result",
             )
 
-            def evaluator(actual: str, expected: str) -> tuple[bool, list[EvalMetric]]:
+            def evaluator(
+                actual: str, expected: str
+            ) -> tuple[bool, list[EvalMetric]]:
                 passed = actual == expected
-                metrics = [EvalMetric(name="match", value=1.0 if passed else 0.0, threshold=0.5)]
-                return passed, metrics
+                metric = EvalMetric(
+                    name="match",
+                    value=1.0 if passed else 0.0,
+                    threshold=0.5,
+                )
+                return passed, [metric]
 
             runner1.run_test_case(tc, evaluator)
             filepath = str(Path(tmpdir) / "results.json")
@@ -512,4 +554,3 @@ class TestMetricsCollector:
         collector.record_metric("accuracy", 0.95)
         collector.clear()
         assert len(collector.metrics) == 0
-
