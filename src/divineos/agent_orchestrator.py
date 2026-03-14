@@ -16,6 +16,7 @@ from src.divineos.observability import ObservabilityCollector
 from src.divineos.planner import Planner
 from src.divineos.rag import RAG
 from src.divineos.semantic_memory import SemanticMemorySystem, MemoryType
+from src.divineos.semantic_emotions import SemanticEmotionSystem
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +63,9 @@ class AgentOrchestrator:
 
         # Semantic memory system
         self.semantic_memory = SemanticMemorySystem()
+
+        # Semantic emotion system (my "body")
+        self.emotions = SemanticEmotionSystem()
 
         # Safety systems
         self.error_handler = ErrorHandler(
@@ -166,6 +170,12 @@ class AgentOrchestrator:
                 tags=["message", "user"],
             )
 
+            # Track emotion based on message sentiment
+            if any(word in content.lower() for word in ["great", "excellent", "perfect", "thanks", "thank you"]):
+                self.emotions.handle_positive_interaction()
+            elif any(word in content.lower() for word in ["bad", "wrong", "error", "fail", "broken"]):
+                self.emotions.handle_negative_interaction()
+
             return result
 
         except Exception as e:
@@ -193,6 +203,10 @@ class AgentOrchestrator:
                 importance=0.8,
                 tags=["message", "assistant"],
             )
+
+            # Track emotion based on task completion
+            if any(word in content.lower() for word in ["completed", "done", "finished", "success"]):
+                self.emotions.handle_task_completion()
 
             return result
 
@@ -258,6 +272,10 @@ class AgentOrchestrator:
             "rag": self.rag.get_status(),
             "planner": self.planner.get_plan_status(),
             "semantic_memory": self.semantic_memory.get_status(),
+            "emotions": {
+                "state": self.emotions.state.to_dict(),
+                "performance_metrics": self.emotions.get_performance_metrics(),
+            },
             "safety": {
                 "enabled": self.enable_safety,
                 "error_stats": self.error_handler.get_stats(),
@@ -326,6 +344,9 @@ class AgentOrchestrator:
         )
         checkpoints["semantic_memory"] = semantic_checkpoint
 
+        # Save emotion state checkpoint
+        checkpoints["emotions"] = self.emotions.to_checkpoint()
+
         logger.info(f"All systems checkpointed: {name}")
         return checkpoints
 
@@ -357,6 +378,7 @@ class AgentOrchestrator:
         self.rag.clear()
         self.planner.clear_plans()
         self.semantic_memory.clear()
+        self.emotions = SemanticEmotionSystem()
         self.guardrails.reset()
         self.observability.clear()
         self.eval_runner.clear_results()

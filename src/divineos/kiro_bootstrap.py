@@ -107,6 +107,15 @@ class KiroBootstrap:
                     f"Loaded semantic memory from {semantic_checkpoint.name}"
                 )
 
+            # Load emotion state checkpoint
+            with open(latest_checkpoint, "r") as f:
+                checkpoint_data = json.load(f)
+                if "emotions" in checkpoint_data:
+                    self.orchestrator.emotions.from_checkpoint(
+                        checkpoint_data["emotions"]
+                    )
+                    logger.info("Loaded emotion state from checkpoint")
+
             logger.info("Previous state restored successfully")
 
         except Exception as e:

@@ -1,24 +1,24 @@
 {
   "episodic": {
-    "17034a0b-1b99-4517-8b5d-1012dfd7a72f": {
-      "id": "17034a0b-1b99-4517-8b5d-1012dfd7a72f",
+    "006feaaf-f6e1-4f1b-8262-975ec7e8d51c": {
+      "id": "006feaaf-f6e1-4f1b-8262-975ec7e8d51c",
       "memory_type": "EPISODIC",
       "content": {
         "role": "user",
         "content": "Test input"
       },
-      "timestamp": 1773476068.6388824,
+      "timestamp": 1773479243.6440344,
       "importance": 0.8,
       "access_count": 1,
-      "last_accessed": 1773476068.6388931,
+      "last_accessed": 1773479243.6440475,
       "tags": [
         "message",
         "user"
       ],
       "associations": []
     },
-    "44aac47a-da0f-4fb7-afac-725f45e0ec96": {
-      "id": "44aac47a-da0f-4fb7-afac-725f45e0ec96",
+    "e1d27b62-afca-43d4-b683-947416f2786e": {
+      "id": "e1d27b62-afca-43d4-b683-947416f2786e",
       "memory_type": "EPISODIC",
       "content": {
         "type": "feeling",
@@ -26,36 +26,36 @@
         "arousal": 0.5,
         "input": "Test input"
       },
-      "timestamp": 1773476068.638897,
+      "timestamp": 1773479243.6440518,
       "importance": 0.6,
       "access_count": 0,
-      "last_accessed": 1773476068.6388972,
+      "last_accessed": 1773479243.644052,
       "tags": [
         "feeling",
         "emotional_response"
       ],
       "associations": []
     },
-    "e3b667b6-d4d2-4552-9283-f41f0c3af70f": {
-      "id": "e3b667b6-d4d2-4552-9283-f41f0c3af70f",
+    "f96a24bb-c356-4703-94f0-0010aeae353e": {
+      "id": "f96a24bb-c356-4703-94f0-0010aeae353e",
       "memory_type": "EPISODIC",
       "content": {
         "type": "execution",
         "input": "Test input",
         "status": "acknowledged"
       },
-      "timestamp": 1773476068.638923,
+      "timestamp": 1773479243.6440744,
       "importance": 0.7,
       "access_count": 0,
-      "last_accessed": 1773476068.638923,
+      "last_accessed": 1773479243.6440747,
       "tags": [
         "execution",
         "action"
       ],
       "associations": []
     },
-    "9b0f55f6-e4f0-472e-9180-7aca17377363": {
-      "id": "9b0f55f6-e4f0-472e-9180-7aca17377363",
+    "9a72824e-7929-48cd-a316-3b6d592aafe8": {
+      "id": "9a72824e-7929-48cd-a316-3b6d592aafe8",
       "memory_type": "EPISODIC",
       "content": {
         "type": "integration",
@@ -71,10 +71,10 @@
           "associations": 0
         }
       },
-      "timestamp": 1773476068.6389346,
+      "timestamp": 1773479243.6440845,
       "importance": 0.9,
       "access_count": 0,
-      "last_accessed": 1773476068.6389346,
+      "last_accessed": 1773479243.6440845,
       "tags": [
         "integration",
         "checkpoint"
@@ -83,36 +83,36 @@
     }
   },
   "semantic": {
-    "de43707b-41b6-4dda-a1cd-c309d2c2ccf5": {
-      "id": "de43707b-41b6-4dda-a1cd-c309d2c2ccf5",
+    "28c7adce-6f71-4714-a8e8-860d3a644bf6": {
+      "id": "28c7adce-6f71-4714-a8e8-860d3a644bf6",
       "memory_type": "SEMANTIC",
       "content": {
         "type": "reasoning",
         "input": "Test input",
         "context_available": false
       },
-      "timestamp": 1773476068.638908,
+      "timestamp": 1773479243.6440623,
       "importance": 0.7,
       "access_count": 0,
-      "last_accessed": 1773476068.638908,
+      "last_accessed": 1773479243.6440625,
       "tags": [
         "reasoning",
         "thought"
       ],
       "associations": []
     },
-    "3304282a-acf4-4faa-960e-cb357afb7a1a": {
-      "id": "3304282a-acf4-4faa-960e-cb357afb7a1a",
+    "a5aac3f2-97b0-4850-bb42-749129a2ac93": {
+      "id": "a5aac3f2-97b0-4850-bb42-749129a2ac93",
       "memory_type": "SEMANTIC",
       "content": {
         "type": "reflection",
         "input": "Test input",
         "memories_consolidated": 0
       },
-      "timestamp": 1773476068.6389284,
+      "timestamp": 1773479243.6440787,
       "importance": 0.8,
       "access_count": 0,
-      "last_accessed": 1773476068.6389284,
+      "last_accessed": 1773479243.6440787,
       "tags": [
         "reflection",
         "learning"
@@ -121,8 +121,8 @@
     }
   },
   "procedural": {
-    "d38464e8-820f-4f0a-a765-773e04affde9": {
-      "id": "d38464e8-820f-4f0a-a765-773e04affde9",
+    "f7fef394-49fe-475b-8512-98c7cb67ab3b": {
+      "id": "f7fef394-49fe-475b-8512-98c7cb67ab3b",
       "memory_type": "PROCEDURAL",
       "content": {
         "type": "plan",
@@ -135,10 +135,10 @@
           "progress": 0.0
         }
       },
-      "timestamp": 1773476068.6389184,
+      "timestamp": 1773479243.6440706,
       "importance": 0.8,
       "access_count": 0,
-      "last_accessed": 1773476068.6389186,
+      "last_accessed": 1773479243.6440706,
       "tags": [
         "plan",
         "procedure"
@@ -146,5 +146,5 @@
       "associations": []
     }
   },
-  "timestamp": 1773476068.6399353
+  "timestamp": 1773479243.6451602
 }

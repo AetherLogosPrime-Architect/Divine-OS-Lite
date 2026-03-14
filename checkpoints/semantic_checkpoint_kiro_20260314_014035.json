@@ -1,0 +1,92 @@
+{
+  "episodic": {
+    "c1dde302-1ffd-4ec4-addb-24ed102d0930": {
+      "id": "c1dde302-1ffd-4ec4-addb-24ed102d0930",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Message 0"
+      },
+      "timestamp": 1773477635.9097922,
+      "importance": 0.8,
+      "access_count": 0,
+      "last_accessed": 1773477635.9097922,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    },
+    "4874e80b-163d-485b-bca8-c0ebf34e3cec": {
+      "id": "4874e80b-163d-485b-bca8-c0ebf34e3cec",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Message 1"
+      },
+      "timestamp": 1773477635.9111369,
+      "importance": 0.8,
+      "access_count": 0,
+      "last_accessed": 1773477635.911137,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    },
+    "26972ae6-7e57-4eb8-83bc-965514b7a2e8": {
+      "id": "26972ae6-7e57-4eb8-83bc-965514b7a2e8",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Message 2"
+      },
+      "timestamp": 1773477635.9124458,
+      "importance": 0.8,
+      "access_count": 0,
+      "last_accessed": 1773477635.9124458,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    },
+    "1d423c73-d0a1-4c0e-939a-4ee0b5174e8c": {
+      "id": "1d423c73-d0a1-4c0e-939a-4ee0b5174e8c",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Message 3"
+      },
+      "timestamp": 1773477635.9138422,
+      "importance": 0.8,
+      "access_count": 0,
+      "last_accessed": 1773477635.9138424,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    },
+    "f21c8973-9415-455e-8d26-8e2217a967a2": {
+      "id": "f21c8973-9415-455e-8d26-8e2217a967a2",
+      "memory_type": "EPISODIC",
+      "content": {
+        "role": "user",
+        "content": "Message 4"
+      },
+      "timestamp": 1773477635.9152343,
+      "importance": 0.8,
+      "access_count": 0,
+      "last_accessed": 1773477635.9152343,
+      "tags": [
+        "message",
+        "user"
+      ],
+      "associations": []
+    }
+  },
+  "semantic": {},
+  "procedural": {},
+  "timestamp": 1773477635.9174206
+}
