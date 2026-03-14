@@ -1,6 +1,7 @@
 """
 Memory orchestrator - coordinates all memory operations.
 Manages the full lifecycle: load → track → compress → save.
+Integrates semantic memory for consciousness and learning.
 """
 
 import logging
@@ -10,6 +11,7 @@ from typing import Any, Optional
 from src.divineos.memory_manager import MemoryManager
 from src.divineos.summarizer import Summarizer
 from src.divineos.token_counter import TokenCounter
+from src.divineos.semantic_memory import SemanticMemorySystem, MemoryType
 
 logger = logging.getLogger(__name__)
 
@@ -49,6 +51,7 @@ class MemoryOrchestrator:
         )
         self.summarizer = Summarizer()
         self.token_counter = TokenCounter(model=model)
+        self.semantic_memory = SemanticMemorySystem()
 
         # State tracking
         self.is_loaded = False
@@ -99,6 +102,14 @@ class MemoryOrchestrator:
         # Add message to manager
         msg_id = self.memory_manager.add_message(role, content)
         self.messages = self.memory_manager.memory.get_all_messages()
+
+        # Store as semantic memory (episodic)
+        self.semantic_memory.store(
+            MemoryType.EPISODIC,
+            {"role": role, "content": content, "message_id": msg_id},
+            importance=0.7,
+            tags=["message", role],
+        )
 
         # Check if compression needed
         status = self.memory_manager.get_context_status()
@@ -214,6 +225,14 @@ class MemoryOrchestrator:
         # Save checkpoint
         checkpoint = self.memory_manager.save_checkpoint(checkpoint_path)
 
+        # Save semantic memory checkpoint
+        semantic_checkpoint_path = checkpoint_path.replace(
+            ".json", "_semantic.json"
+        )
+        semantic_checkpoint = self.semantic_memory.save_checkpoint(
+            semantic_checkpoint_path
+        )
+
         self.checkpoint_count += 1
 
         logger.info(f"Checkpoint saved: {checkpoint_path}")
@@ -223,6 +242,7 @@ class MemoryOrchestrator:
             "message_count": checkpoint["message_count"],
             "token_count": checkpoint["token_count"],
             "timestamp": checkpoint["timestamp"],
+            "semantic_memories": semantic_checkpoint["total_memories"],
         }
 
     def get_status(self) -> dict[str, Any]:
@@ -240,6 +260,7 @@ class MemoryOrchestrator:
 
         context_status = self.memory_manager.get_context_status()
         summary_stats = self.summarizer.get_summary_stats()
+        semantic_status = self.semantic_memory.get_status()
 
         return {
             "is_loaded": True,
@@ -254,6 +275,7 @@ class MemoryOrchestrator:
             "compressions_performed": self.compression_count,
             "checkpoints_saved": self.checkpoint_count,
             "total_summaries": summary_stats["total_summaries_created"],
+            "semantic_memory": semantic_status,
         }
 
     def get_recent_context(self, count: int = 10) -> list[dict[str, Any]]:
@@ -282,6 +304,7 @@ class MemoryOrchestrator:
             compression_threshold=self.compression_threshold,
         )
         self.summarizer.reset_stats()
+        self.semantic_memory.clear()
 
         self.is_loaded = False
         self.compression_count = 0

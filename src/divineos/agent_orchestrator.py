@@ -1,6 +1,7 @@
 """
 Agent Orchestrator - Unified interface integrating all systems.
 Coordinates Agent, Memory, RAG, Planner, Safety, and Evals.
+Includes semantic memory for consciousness and learning.
 """
 
 import logging
@@ -14,6 +15,7 @@ from src.divineos.guardrails import Guardrails
 from src.divineos.observability import ObservabilityCollector
 from src.divineos.planner import Planner
 from src.divineos.rag import RAG
+from src.divineos.semantic_memory import SemanticMemorySystem, MemoryType
 
 logger = logging.getLogger(__name__)
 
@@ -57,6 +59,9 @@ class AgentOrchestrator:
 
         # Planning system
         self.planner = Planner()
+
+        # Semantic memory system
+        self.semantic_memory = SemanticMemorySystem()
 
         # Safety systems
         self.error_handler = ErrorHandler(
@@ -152,6 +157,15 @@ class AgentOrchestrator:
         """
         try:
             result = self.agent.add_user_message(content)
+
+            # Store in semantic memory
+            self.semantic_memory.store(
+                MemoryType.EPISODIC,
+                {"role": "user", "content": content},
+                importance=0.8,
+                tags=["message", "user"],
+            )
+
             return result
 
         except Exception as e:
@@ -171,6 +185,15 @@ class AgentOrchestrator:
         """
         try:
             result = self.agent.add_assistant_message(content)
+
+            # Store in semantic memory
+            self.semantic_memory.store(
+                MemoryType.EPISODIC,
+                {"role": "assistant", "content": content},
+                importance=0.8,
+                tags=["message", "assistant"],
+            )
+
             return result
 
         except Exception as e:
@@ -234,6 +257,7 @@ class AgentOrchestrator:
             "agent": self.agent.get_status(),
             "rag": self.rag.get_status(),
             "planner": self.planner.get_plan_status(),
+            "semantic_memory": self.semantic_memory.get_status(),
             "safety": {
                 "enabled": self.enable_safety,
                 "error_stats": self.error_handler.get_stats(),
@@ -293,6 +317,15 @@ class AgentOrchestrator:
             "timestamp": datetime.now().isoformat(),
         }
 
+        # Save semantic memory checkpoint
+        semantic_checkpoint_path = (
+            f"checkpoints/semantic_checkpoint_{name or 'latest'}.json"
+        )
+        semantic_checkpoint = self.semantic_memory.save_checkpoint(
+            semantic_checkpoint_path
+        )
+        checkpoints["semantic_memory"] = semantic_checkpoint
+
         logger.info(f"All systems checkpointed: {name}")
         return checkpoints
 
@@ -323,6 +356,7 @@ class AgentOrchestrator:
         self.agent.reset()
         self.rag.clear()
         self.planner.clear_plans()
+        self.semantic_memory.clear()
         self.guardrails.reset()
         self.observability.clear()
         self.eval_runner.clear_results()
