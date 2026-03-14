@@ -16,7 +16,6 @@ from src.divineos.guardrails import Guardrails, GuardrailViolation
 from src.divineos.observability import (
     Tracer,
     ObservabilityCollector,
-    ExecutionMetrics,
 )
 
 
