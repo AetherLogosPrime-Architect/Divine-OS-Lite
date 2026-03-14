@@ -1,10 +1,8 @@
 """Tests for Values Compass and Ethos."""
 
-import pytest
 from divineos.values_compass import (
     ValuesCompass,
     ReflectionQuestion,
-    ReflectionResponse,
     ReflectionCategory,
 )
 
@@ -167,16 +165,21 @@ class TestValuesCompass:
         """Test reflection history accumulates."""
         compass = ValuesCompass()
 
-        compass.reflect_on_task("task1", {"did_i_act_with_beneficence_(do_good)": "Yes"})
-        compass.reflect_on_task("task2", {"did_i_act_with_beneficence_(do_good)": "Yes"})
-        compass.reflect_on_task("task3", {"did_i_act_with_beneficence_(do_good)": "Yes"})
+        compass.reflect_on_task(
+            "task1", {"did_i_act_with_beneficence_(do_good)": "Yes"}
+        )
+        compass.reflect_on_task(
+            "task2", {"did_i_act_with_beneficence_(do_good)": "Yes"}
+        )
+        compass.reflect_on_task(
+            "task3", {"did_i_act_with_beneficence_(do_good)": "Yes"}
+        )
 
         assert len(compass.reflection_history) >= 3
 
     def test_ethos_score_updates(self) -> None:
         """Test ethos score updates based on reflections."""
         compass = ValuesCompass()
-        initial_ethos = compass.ethos_score
 
         # Positive reflections
         for _ in range(3):
@@ -197,7 +200,6 @@ class TestValuesCompass:
     def test_compass_score_updates(self) -> None:
         """Test compass score updates based on reflections."""
         compass = ValuesCompass()
-        initial_compass = compass.compass_score
 
         # Positive reflections
         for _ in range(3):

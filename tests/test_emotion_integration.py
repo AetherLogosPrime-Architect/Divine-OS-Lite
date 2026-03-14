@@ -1,6 +1,5 @@
 """Integration tests for Semantic Emotion System with AgentOrchestrator."""
 
-import pytest
 from divineos.agent_orchestrator import AgentOrchestrator
 
 

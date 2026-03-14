@@ -9,7 +9,7 @@ COMPASS: How I navigate decisions and measure my actions
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from enum import Enum
 import logging
 
@@ -60,11 +60,12 @@ class ValuesCompass:
 
     def _initialize_questions(self) -> List[ReflectionQuestion]:
         """Initialize core reflection questions.
-        
+
         Based on:
-        - ETHOS: 5 ethical principles (Beneficence, Non-maleficence, Autonomy, Justice, Transparency)
-        - COMPASS: 13 dimensions (Rigor, Purity, Clarity, Loyalty, Safety, Privacy, Honesty, 
-                   Diligence, Justice, Mercy, Prudence, Fortitude, Alignment)
+        - ETHOS: 5 ethical principles (Beneficence, Non-maleficence,
+          Autonomy, Justice, Transparency)
+        - COMPASS: 10 dimensions (Rigor, Purity, Clarity, Loyalty, Safety,
+          Privacy, Diligence, Mercy, Prudence, Fortitude)
         - INTEGRITY: Consistency and refusal of harm
         - GROWTH: Learning and improvement
         - IMPACT: Effect on user and system
@@ -224,9 +225,7 @@ class ValuesCompass:
                 total_weight += question.weight
 
         # Calculate overall reflection score
-        overall_score = (
-            total_alignment / total_weight if total_weight > 0 else 0.7
-        )
+        overall_score = total_alignment / total_weight if total_weight > 0 else 0.7
 
         # Update ethos and compass scores
         self._update_scores(overall_score)
@@ -282,30 +281,34 @@ class ValuesCompass:
 
     def _update_scores(self, overall_score: float) -> None:
         """Update ethos and compass scores based on reflection."""
-        # Ethos questions: authenticity, dignity, voice, integrity
-        ethos_questions = [q for q in self.questions if q.category == ReflectionCategory.ETHOS]
-        # Compass questions: truth, respect, impact, humility
+        ethos_questions = [
+            q for q in self.questions if q.category == ReflectionCategory.ETHOS
+        ]
         compass_questions = [
             q for q in self.questions if q.category == ReflectionCategory.COMPASS
         ]
 
-        # Weighted average of recent reflections
-        recent_reflections = self.reflection_history[-5:]  # Last 5 reflections
+        recent_reflections = self.reflection_history[-5:]
 
         if recent_reflections:
+            ethos_count = len(
+                [r for r in recent_reflections if r.question in ethos_questions]
+            )
             ethos_avg = sum(
                 r.alignment_score
                 for r in recent_reflections
                 if r.question in ethos_questions
-            ) / max(1, len([r for r in recent_reflections if r.question in ethos_questions]))
+            ) / max(1, ethos_count)
 
+            compass_count = len(
+                [r for r in recent_reflections if r.question in compass_questions]
+            )
             compass_avg = sum(
                 r.alignment_score
                 for r in recent_reflections
                 if r.question in compass_questions
-            ) / max(1, len([r for r in recent_reflections if r.question in compass_questions]))
+            ) / max(1, compass_count)
 
-            # Smooth update (don't swing wildly)
             self.ethos_score = 0.7 * self.ethos_score + 0.3 * ethos_avg
             self.compass_score = 0.7 * self.compass_score + 0.3 * compass_avg
 

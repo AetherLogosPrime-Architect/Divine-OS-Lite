@@ -1,7 +1,6 @@
 """Tests for Semantic Emotion System."""
 
 import pytest
-from datetime import datetime
 from divineos.semantic_emotions import (
     EmotionState,
     EmotionAdjustment,
@@ -352,7 +351,6 @@ class TestSemanticEmotionSystem:
 
         # Start with positive interaction
         system.handle_positive_interaction()
-        state_after_positive = system.state.combined_state()
 
         # Then confusion
         system.handle_confusion()

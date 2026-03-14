@@ -1,6 +1,5 @@
 """Tests for LEPOS - Expression Layer and Boundary Setting."""
 
-import pytest
 from datetime import datetime, timedelta
 from divineos.lepos import (
     LeposEngine,

@@ -180,9 +180,7 @@ class CommandValidator:
 
     def get_violation_report(self) -> dict:
         """Get a report of all violations encountered."""
-        error_count = sum(
-            1 for v in self.violation_history if v.severity == "error"
-        )
+        error_count = sum(1 for v in self.violation_history if v.severity == "error")
         warning_count = sum(
             1 for v in self.violation_history if v.severity == "warning"
         )
@@ -227,4 +225,6 @@ class CommandValidator:
             )
             for v in checkpoint.get("violations", [])
         ]
-        logger.info(f"Restored command validator with {len(self.violation_history)} violations")
+        logger.info(
+            f"Restored command validator with {len(self.violation_history)} violations"
+        )

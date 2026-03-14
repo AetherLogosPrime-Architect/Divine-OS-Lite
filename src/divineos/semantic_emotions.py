@@ -204,4 +204,4 @@ class SemanticEmotionSystem:
             for adj in history_data
         ]
 
-        logger.info(f"Restored emotion state from checkpoint")
+        logger.info("Restored emotion state from checkpoint")

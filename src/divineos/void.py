@@ -178,14 +178,18 @@ class VoidEngine:
             "everyone knows",
             "it's obvious",
         ]
-        return any(indicator in reasoning.lower() for indicator in assumption_indicators)
+        return any(
+            indicator in reasoning.lower() for indicator in assumption_indicators
+        )
 
     def _is_logically_consistent(self, reasoning: str) -> bool:
         """Check if reasoning is logically consistent."""
         contradiction_indicators = ["but", "however", "yet", "although"]
         # Simple heuristic: if there are contradictions, flag it
         contradiction_count = sum(
-            1 for indicator in contradiction_indicators if indicator in reasoning.lower()
+            1
+            for indicator in contradiction_indicators
+            if indicator in reasoning.lower()
         )
         return contradiction_count <= 2
 
@@ -243,7 +247,9 @@ class VoidEngine:
         if overall_risk > 0.8:
             return "STOP: High risk detected. Reconsider this approach entirely."
         elif overall_risk > 0.6:
-            return "CAUTION: Significant concerns. Address challenges before proceeding."
+            return (
+                "CAUTION: Significant concerns. Address challenges before proceeding."
+            )
         elif overall_risk > 0.4:
             return "REVIEW: Minor concerns. Consider suggested fixes."
         else:
@@ -291,4 +297,4 @@ class VoidEngine:
             )
             for c in checkpoint.get("challenge_history", [])
         ]
-        logger.info(f"Restored VOID state from checkpoint")
+        logger.info("Restored VOID state from checkpoint")

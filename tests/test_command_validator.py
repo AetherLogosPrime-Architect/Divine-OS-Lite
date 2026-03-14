@@ -1,9 +1,7 @@
 """Tests for CommandValidator - structural enforcement of command syntax."""
 
-import pytest
 from divineos.command_validator import (
     CommandValidator,
-    CommandViolation,
     ViolationType,
 )
 
@@ -64,9 +62,7 @@ class TestCommandValidator:
     def test_unix_operator_and_and_detected(self) -> None:
         """Test that '&&' operator is detected."""
         validator = CommandValidator()
-        is_valid, violations = validator.validate_command(
-            "python test.py && echo done"
-        )
+        is_valid, violations = validator.validate_command("python test.py && echo done")
 
         assert not is_valid
         assert any(v.violation_type == ViolationType.UNIX_OPERATOR for v in violations)
@@ -74,7 +70,9 @@ class TestCommandValidator:
     def test_unix_operator_or_or_detected(self) -> None:
         """Test that '||' operator is detected."""
         validator = CommandValidator()
-        is_valid, violations = validator.validate_command("python test.py || echo failed")
+        is_valid, violations = validator.validate_command(
+            "python test.py || echo failed"
+        )
 
         assert not is_valid
         assert any(v.violation_type == ViolationType.UNIX_OPERATOR for v in violations)
@@ -177,9 +175,7 @@ class TestCommandValidator:
     def test_word_boundary_matching(self) -> None:
         """Test that word boundaries are respected (cd not in 'discord')."""
         validator = CommandValidator()
-        is_valid, violations = validator.validate_command(
-            "python discord_bot.py"
-        )
+        is_valid, violations = validator.validate_command("python discord_bot.py")
 
         # Should be valid because 'cd' is not a standalone word
         assert is_valid
@@ -224,6 +220,4 @@ class TestCommandValidator:
         assert not is_valid
         # Should have violations for cd, &&, grep, AND ignoreWarning
         assert len(violations) >= 2
-        assert any(
-            v.violation_type == ViolationType.IGNORE_WARNING for v in violations
-        )
+        assert any(v.violation_type == ViolationType.IGNORE_WARNING for v in violations)
