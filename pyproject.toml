@@ -80,6 +80,11 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 warn_no_return = true
 strict_equality = true
+namespace_packages = true
+explicit_package_bases = true
+mypy_path = "src"
+exclude = [".mypy_cache", ".pytest_cache", "build", "dist"]
+ignore_missing_imports = false
 
 [tool.pylint.messages_control]
 disable = [
