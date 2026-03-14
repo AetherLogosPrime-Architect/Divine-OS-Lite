@@ -1,6 +1,5 @@
 """Tests for RAG (Retrieval-Augmented Generation) module."""
 
-import json
 import tempfile
 from pathlib import Path
 

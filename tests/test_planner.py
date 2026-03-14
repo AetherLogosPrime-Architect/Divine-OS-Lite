@@ -3,9 +3,6 @@ Tests for planning and reasoning modules.
 Verify agent planning and reasoning capabilities.
 """
 
-import pytest
-import time
-
 from src.divineos.planner import (
     Planner,
     ReasoningEngine,
@@ -40,16 +37,6 @@ class TestPlan:
 
     def test_init(self) -> None:
         """Test initialization."""
-        steps = [
-            {
-                "description": "Step 1",
-                "reasoning": "First step",
-                "expected_outcome": "Done",
-                "tools_needed": ["tool1"],
-                "dependencies": [],
-            }
-        ]
-
         plan = Plan(
             goal="Test goal",
             reasoning="Test reasoning",
