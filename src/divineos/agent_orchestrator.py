@@ -136,7 +136,7 @@ class AgentOrchestrator:
         Returns:
             Plan details
         """
-        plan = self.planner.create_plan(goal, reasoning, steps=[])
+        self.planner.create_plan(goal, reasoning, steps=[])
         logger.info(f"Plan created for goal: {goal}")
         return self.planner.get_plan_details()
 
@@ -272,7 +272,7 @@ class AgentOrchestrator:
         Returns:
             Evaluation summary
         """
-        results = self.eval_runner.run_suite(suite_id, evaluator)
+        self.eval_runner.run_suite(suite_id, evaluator)
         summary = self.eval_runner.get_summary()
         logger.info(f"Evals completed: {summary['pass_rate']:.1f}% pass rate")
         return summary

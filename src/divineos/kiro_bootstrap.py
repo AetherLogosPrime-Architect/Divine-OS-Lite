@@ -225,8 +225,6 @@ def save_kiro_state() -> dict[str, Any]:
     Returns:
         Save metadata
     """
-    global _kiro_bootstrap
-
     if _kiro_bootstrap is None:
         return {"error": "Kiro not initialized"}
 
@@ -240,8 +238,6 @@ def get_kiro_status() -> dict[str, Any]:
     Returns:
         Status dictionary
     """
-    global _kiro_bootstrap
-
     if _kiro_bootstrap is None:
         return {"error": "Kiro not initialized"}
 
