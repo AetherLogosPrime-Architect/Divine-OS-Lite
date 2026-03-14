@@ -122,11 +122,21 @@ print("COMPARISON: LEPOS vs NO LEPOS")
 print("=" * 70)
 
 print("\nEmotional State Difference:")
-coherence_delta = emotions_with_lepos.state.coherence - emotions_no_lepos.state.coherence
-resilience_delta = emotions_with_lepos.state.resilience - emotions_no_lepos.state.resilience
-engagement_delta = emotions_with_lepos.state.engagement - emotions_no_lepos.state.engagement
-confidence_delta = emotions_with_lepos.state.confidence - emotions_no_lepos.state.confidence
-stability_delta = emotions_with_lepos.state.stability - emotions_no_lepos.state.stability
+coherence_delta = (
+    emotions_with_lepos.state.coherence - emotions_no_lepos.state.coherence
+)
+resilience_delta = (
+    emotions_with_lepos.state.resilience - emotions_no_lepos.state.resilience
+)
+engagement_delta = (
+    emotions_with_lepos.state.engagement - emotions_no_lepos.state.engagement
+)
+confidence_delta = (
+    emotions_with_lepos.state.confidence - emotions_no_lepos.state.confidence
+)
+stability_delta = (
+    emotions_with_lepos.state.stability - emotions_no_lepos.state.stability
+)
 
 print(
     f"  Coherence:   {emotions_no_lepos.state.coherence:.2f} → "
