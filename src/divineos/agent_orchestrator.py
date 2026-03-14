@@ -171,9 +171,17 @@ class AgentOrchestrator:
             )
 
             # Track emotion based on message sentiment
-            if any(word in content.lower() for word in ["great", "excellent", "perfect", "thanks", "thank you"]):
+            positive_words = [
+                "great",
+                "excellent",
+                "perfect",
+                "thanks",
+                "thank you",
+            ]
+            negative_words = ["bad", "wrong", "error", "fail", "broken"]
+            if any(word in content.lower() for word in positive_words):
                 self.emotions.handle_positive_interaction()
-            elif any(word in content.lower() for word in ["bad", "wrong", "error", "fail", "broken"]):
+            elif any(word in content.lower() for word in negative_words):
                 self.emotions.handle_negative_interaction()
 
             return result
@@ -205,7 +213,8 @@ class AgentOrchestrator:
             )
 
             # Track emotion based on task completion
-            if any(word in content.lower() for word in ["completed", "done", "finished", "success"]):
+            completion_words = ["completed", "done", "finished", "success"]
+            if any(word in content.lower() for word in completion_words):
                 self.emotions.handle_task_completion()
 
             return result

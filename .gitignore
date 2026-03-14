@@ -72,3 +72,9 @@ Thumbs.db
 divineos.db
 test_*.db
 *.md.bak
+
+# Runtime data and checkpoints
+checkpoints/
+prototype/data/
+prototype/logs/
+prototype/utils/__pycache__/

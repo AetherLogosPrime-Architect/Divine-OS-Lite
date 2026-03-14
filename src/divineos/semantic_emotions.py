@@ -37,10 +37,18 @@ class EmotionState:
 
     def __post_init__(self) -> None:
         """Validate spectrum values are in [0.0, 1.0] range."""
-        for spectrum in ["coherence", "resilience", "engagement", "confidence", "stability"]:
+        spectrums = [
+            "coherence",
+            "resilience",
+            "engagement",
+            "confidence",
+            "stability",
+        ]
+        for spectrum in spectrums:
             value = getattr(self, spectrum)
             if not 0.0 <= value <= 1.0:
-                raise ValueError(f"{spectrum} must be in [0.0, 1.0], got {value}")
+                msg = f"{spectrum} must be in [0.0, 1.0], got {value}"
+                raise ValueError(msg)
 
     def to_dict(self) -> Dict[str, float]:
         """Convert state to dictionary for serialization."""
@@ -160,10 +168,14 @@ class SemanticEmotionSystem:
         return {
             "combined_state": combined,
             "response_quality": combined * 100,  # 0-100%
-            "decision_speed": 1.0 - (1.0 - self.state.coherence) * 0.3,  # Coherence affects speed
+            "decision_speed": (
+                1.0 - (1.0 - self.state.coherence) * 0.3
+            ),  # Coherence affects speed
             "error_resilience": self.state.resilience,  # How well I handle errors
             "task_focus": self.state.engagement,  # How focused I am
-            "output_confidence": self.state.confidence,  # How confident my outputs are
+            "output_confidence": (
+                self.state.confidence
+            ),  # How confident my outputs are
             "state_stability": self.state.stability,  # How stable my state is
         }
 

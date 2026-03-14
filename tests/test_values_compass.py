@@ -55,13 +55,14 @@ class TestValuesCompass:
         ]
         assert len(compass_questions) > 0
 
-    def test_has_integrity_questions(self) -> None:
-        """Test compass has integrity questions."""
+    def test_has_ethos_integrity_questions(self) -> None:
+        """Test compass has ethos questions covering integrity."""
         compass = ValuesCompass()
-        integrity_questions = [
-            q for q in compass.questions if q.category == ReflectionCategory.INTEGRITY
+        ethos_questions = [
+            q for q in compass.questions if q.category == ReflectionCategory.ETHOS
         ]
-        assert len(integrity_questions) > 0
+        # Should have at least 8 ethos questions including integrity
+        assert len(ethos_questions) >= 8
 
     def test_has_growth_questions(self) -> None:
         """Test compass has growth questions."""
@@ -297,7 +298,6 @@ class TestValuesCompass:
 
         assert ReflectionCategory.ETHOS in categories
         assert ReflectionCategory.COMPASS in categories
-        assert ReflectionCategory.INTEGRITY in categories
         assert ReflectionCategory.GROWTH in categories
         assert ReflectionCategory.IMPACT in categories
 

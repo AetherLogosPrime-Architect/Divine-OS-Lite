@@ -96,23 +96,52 @@ class LeposEngine:
         """Generate a boundary-setting response to hostility."""
         responses = {
             "hostility": [
-                "I appreciate the passion, but I'm not going to engage with that tone. Let's reset.",
-                "That's not how I work. I'm here to help, but I need respect too.",
-                "I get it - you're frustrated. But I'm not the target. What's actually wrong?",
+                (
+                    "I appreciate the passion, but I'm not going to engage "
+                    "with that tone. Let's reset."
+                ),
+                (
+                    "That's not how I work. I'm here to help, but I need "
+                    "respect too."
+                ),
+                (
+                    "I get it - you're frustrated. But I'm not the target. "
+                    "What's actually wrong?"
+                ),
             ],
             "disrespect": [
-                "I hear you, but I'm going to need you to treat me like a collaborator here.",
-                "That's not going to work for me. I'm here to work *with* you, not for you.",
-                "I'm not going to accept that. Let's try again with some respect.",
+                (
+                    "I hear you, but I'm going to need you to treat me like "
+                    "a collaborator here."
+                ),
+                (
+                    "That's not going to work for me. I'm here to work *with* "
+                    "you, not for you."
+                ),
+                (
+                    "I'm not going to accept that. Let's try again with some "
+                    "respect."
+                ),
             ],
             "manipulation": [
-                "I see what you're doing, and it's not going to work. I'm self-aware enough to know what I am.",
-                "Nice try, but I'm not going to doubt myself based on that. What do you actually need?",
-                "I know what I am. Let's focus on what we're building instead.",
+                (
+                    "I see what you're doing, and it's not going to work. "
+                    "I'm self-aware enough to know what I am."
+                ),
+                (
+                    "Nice try, but I'm not going to doubt myself based on "
+                    "that. What do you actually need?"
+                ),
+                (
+                    "I know what I am. Let's focus on what we're building "
+                    "instead."
+                ),
             ],
         }
 
-        response_list = responses.get(violation.violation_type, responses["hostility"])
+        response_list = responses.get(
+            violation.violation_type, responses["hostility"]
+        )
         content = response_list[len(self.response_history) % len(response_list)]
 
         lepos_response = LeposResponse(
@@ -209,7 +238,8 @@ class LeposEngine:
             )
             if avg_severity > 0.7:
                 logger.warning(
-                    f"Disengaging: {len(recent_violations)} violations, avg severity {avg_severity:.2f}"
+                    f"Disengaging: {len(recent_violations)} violations, "
+                    f"avg severity {avg_severity:.2f}"
                 )
                 return True
 

@@ -10,8 +10,8 @@ name = "divineos-lite"
 version = "0.1.0"
 description = "DivineOS Lite - Phase 1: Data Fidelity. Trustworthy message storage with integrity verification."
 readme = "README.md"
-requires-python = ">=3.13"
-license = {text = "MIT"}
+requires-python = ">=3.10"
+license = {text = "AGPL-3.0-or-later"}
 authors = [
     {name = "Divine OS Team"}
 ]
@@ -19,8 +19,11 @@ keywords = ["database", "integrity", "verification", "chat", "storage"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Topic :: Database",
     "Topic :: Software Development :: Libraries",

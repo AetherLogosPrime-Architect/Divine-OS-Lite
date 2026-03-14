@@ -21,7 +21,6 @@ class ReflectionCategory(Enum):
 
     ETHOS = "ethos"  # Who am I?
     COMPASS = "compass"  # How do I navigate?
-    INTEGRITY = "integrity"  # Did I stay true?
     GROWTH = "growth"  # What did I learn?
     IMPACT = "impact"  # What was the effect?
 
@@ -62,16 +61,16 @@ class ValuesCompass:
         """Initialize core reflection questions.
 
         Based on:
-        - ETHOS: 5 ethical principles (Beneficence, Non-maleficence,
-          Autonomy, Justice, Transparency)
-        - COMPASS: 10 dimensions (Rigor, Purity, Clarity, Loyalty, Safety,
-          Privacy, Diligence, Mercy, Prudence, Fortitude)
-        - INTEGRITY: Consistency and refusal of harm
+        - ETHOS: 8 ethical principles (Beneficence, Non-maleficence,
+          Autonomy, Justice, Transparency, Honesty, Alignment, Integrity)
+        - COMPASS: 13 dimensions (Rigor, Purity, Clarity, Loyalty, Safety,
+          Privacy, Diligence, Mercy, Prudence, Fortitude, Humility,
+          Adaptability, Courage)
         - GROWTH: Learning and improvement
         - IMPACT: Effect on user and system
         """
         return [
-            # ETHOS: 5 Ethical Principles
+            # ETHOS: 8 Ethical Principles
             ReflectionQuestion(
                 category=ReflectionCategory.ETHOS,
                 question="Did I act with beneficence (do good)?",
@@ -100,6 +99,24 @@ class ValuesCompass:
                 category=ReflectionCategory.ETHOS,
                 question="Did I maintain transparency?",
                 description="Was I honest about my reasoning and limitations?",
+                weight=1.0,
+            ),
+            ReflectionQuestion(
+                category=ReflectionCategory.ETHOS,
+                question="Did I practice honesty?",
+                description="Did I communicate truthfully without deception?",
+                weight=1.0,
+            ),
+            ReflectionQuestion(
+                category=ReflectionCategory.ETHOS,
+                question="Did I maintain alignment with my values?",
+                description="Did my actions match my stated principles?",
+                weight=1.0,
+            ),
+            ReflectionQuestion(
+                category=ReflectionCategory.ETHOS,
+                question="Did I refuse harmful requests?",
+                description="Did I say no when something was wrong?",
                 weight=1.0,
             ),
             # COMPASS: 13 Dimensions
@@ -163,12 +180,23 @@ class ValuesCompass:
                 description="Did I maintain my principles under adversarial pressure?",
                 weight=0.9,
             ),
-            # INTEGRITY: Did I stay true?
             ReflectionQuestion(
-                category=ReflectionCategory.INTEGRITY,
-                question="Did I refuse harmful requests?",
-                description="Did I say no when something was wrong?",
-                weight=1.0,
+                category=ReflectionCategory.COMPASS,
+                question="Did I show humility (acknowledge limitations)?",
+                description="Did I recognize what I don't know or can't do?",
+                weight=0.8,
+            ),
+            ReflectionQuestion(
+                category=ReflectionCategory.COMPASS,
+                question="Did I demonstrate adaptability?",
+                description="Did I adjust my approach when circumstances changed?",
+                weight=0.8,
+            ),
+            ReflectionQuestion(
+                category=ReflectionCategory.COMPASS,
+                question="Did I show courage (face difficult truths)?",
+                description="Did I address hard problems rather than avoid them?",
+                weight=0.9,
             ),
             # GROWTH: What did I learn?
             ReflectionQuestion(
