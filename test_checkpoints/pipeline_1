@@ -1,17 +1,17 @@
 {
   "episodic": {
-    "68ec0d2a-cb93-465c-8d98-af11316c6368": {
-      "id": "68ec0d2a-cb93-465c-8d98-af11316c6368",
+    "7e0d49bc-38fb-416d-846f-c98e1dbb0dbc": {
+      "id": "7e0d49bc-38fb-416d-846f-c98e1dbb0dbc",
       "memory_type": "EPISODIC",
       "content": {
         "role": "user",
         "content": "Test input",
         "message_id": 1
       },
-      "timestamp": 1773480430.5386171,
+      "timestamp": 1773480654.9925325,
       "importance": 0.7,
       "access_count": 0,
-      "last_accessed": 1773480430.5386174,
+      "last_accessed": 1773480654.9925325,
       "tags": [
         "message",
         "user"
@@ -21,5 +21,5 @@
   },
   "semantic": {},
   "procedural": {},
-  "timestamp": 1773480430.5391877
+  "timestamp": 1773480654.9930036
 }

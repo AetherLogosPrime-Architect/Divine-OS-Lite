@@ -7,7 +7,7 @@ It's designed to be run before commits to ensure correctness over speed.
 import subprocess
 import sys
 from pathlib import Path
-from typing import List, Tuple
+from typing import List
 
 
 class QualityEnforcer:
